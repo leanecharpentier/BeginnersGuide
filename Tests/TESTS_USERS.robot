@@ -15,7 +15,7 @@ ${username}    Admin
 ${password}    admin123
 ${username1}   James
 ${password1}   laplusbelle49
-${employee_name}   James  Butler
+${employee_name}   Anisse Desvallois hi
 ${role}   Admin
 ${status}   Enabled
 ${newUsername}    JamesB
@@ -46,8 +46,6 @@ Test02 Rechercher un utilisateur
     Then Vérifier que le message qui s'affiche    (1) Record Found
     Then Vérifier l'utilisateur qui s'affiche
 
-
-
 Test03 - Modifier un utilisateur
     Given Aller sur la page admin
     When Remplir le formulaire de recherche    ${username1}    ${role}    ${status}
@@ -56,6 +54,12 @@ Test03 - Modifier un utilisateur
     When Modifier les informations de l'utilisateur    ${newUsername}
     And Cliquer sur le bouton Enregistrer
     Then Vérifier que l'utilisateur a été modifié avec succès    Successfully Updated
+
+Test04 - Supprimer un utilisateur
+    Given Aller sur la page admin
+    When Remplir le formulaire de recherche    ${username1}    ${role}    ${status}
+    When Cliquer sur le bouton Search
+    And Cliquer sur le bouton de suppression de l'utilisateur
 
 *** Keywords ***
 Ouvrir Orange_HRM
@@ -105,6 +109,10 @@ Modifier les informations de l'utilisateur
 Cliquer sur le bouton Enregistrer
     Scroll Element Into View         xpath=//button[@type='submit']
     Click Element    xpath=//button[@type='submit']
+
+Cliquer sur le bouton de suppression de l'utilisateur
+    SeleniumLibrary.Click Element    xpath=//i[@class="oxd-icon bi-trash"]
+    SeleniumLibrary.Click Element    xpath=//button[@class="oxd-button oxd-button--medium oxd-button--label-danger orangehrm-button-margin"]
 
 Clicker sur le bouton "+ Add"
     SeleniumLibrary.Click Element   xpath=//button[@type='button' and @class='oxd-button oxd-button--medium oxd-button--secondary']
