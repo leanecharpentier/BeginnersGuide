@@ -29,9 +29,9 @@ Test01 Ajouter un utilisateur
     ...   Remplir le formulaire d'ajout d'utilisateur ${\n}
     ...   Vérifier que l'utilisateur est bien ajouté ${\n}
     Given Aller sur la page Admin
-    When Clicker sur le bouton "+ Add"
-    And Remplir le formulaire d'ajout d'utilisateur    ${username1}    ${password1}    ${role}    ${status}   ${employee_name}
-    Then Vérifier que l'utilisateur est bien ajouté    ${username1}
+    When  Clicker sur le bouton "+ Add"
+    And   Remplir le formulaire d'ajout d'utilisateur    ${username1}    ${password1}    ${role}    ${status}   ${employee_name}
+    Then  Vérifier que l'utilisateur est bien ajouté    ${username1}
 
 Test02 Rechercher un utilisateur
     [Documentation]
