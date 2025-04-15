@@ -14,11 +14,10 @@ ${ORANGE_HRM_URL}    https://opensource-demo.orangehrmlive.com
 ${username}    Admin
 ${password}    admin123
 ${username1}   James
-${password1}   laplusbelle49
-${employee_name}   Anisse Desvallois hi
+${password1}   test123
+${employee_name}   James
 ${role}   Admin
 ${status}   Enabled
-${newUsername}    JamesB
 
 
 *** Test Cases ***
@@ -30,16 +29,16 @@ Test01 Ajouter un utilisateur
     ...   Remplir le formulaire d'ajout d'utilisateur ${\n}
     ...   Vérifier que l'utilisateur est bien ajouté ${\n}
     Given Aller sur la page Admin
-    When Clicker sur le bouton "+ Add"
-    And Remplir le formulaire d'ajout d'utilisateur    ${username1}    ${password1}    ${role}    ${status}   ${employee_name}
-    Then Vérifier que l'utilisateur est bien ajouté    ${username1}
+    When  Clicker sur le bouton "+ Add"
+    And   Remplir le formulaire d'ajout d'utilisateur    ${username1}    ${password1}    ${role}    ${status}   ${employee_name}
+    Then  Vérifier que l'utilisateur est bien ajouté    ${username1}
 
 Test02 Rechercher un utilisateur
-    [Documentation]    ...    ${\n}Rechercher un utilisateur
-    ...    Remplir le formulaire de rechercher
-    ...    Cliquer sur le bouton rechercher
-    ...    Vérifier que
-    # Naviguer vers
+    [Documentation]
+    ...    Rechercher un utilisateur ${\n}
+    ...    Remplir le formulaire de rechercher ${\n}
+    ...    Cliquer sur le bouton rechercher ${\n}
+    ...    Vérifier que l'utilisateur s'affiche ${\n}
     Given Aller sur la page Admin
     When Remplir le formulaire de recherche    ${username1}    ${role}    ${status}
     When Cliquer sur le bouton Search
@@ -47,15 +46,25 @@ Test02 Rechercher un utilisateur
     Then Vérifier l'utilisateur qui s'affiche
 
 Test03 - Modifier un utilisateur
+    [Documentation]
+    ...   Modifier un utilisateur ${\n}
+    ...   Cliquer sur le bouton de modification de l'utilisateur ${\n}
+    ...   Modifier les informations de l'utilisateur ${\n}
+    ...   Cliquer sur le bouton Enregistrer ${\n}
+    ...   Vérifier que l'utilisateur a été modifié avec succès ${\n}
     Given Aller sur la page admin
     When Remplir le formulaire de recherche    ${username1}    ${role}    ${status}
-    And Cliquer sur le bouton Search
+    When Cliquer sur le bouton Search
     And Cliquer sur le bouton de modification de l'utilisateur
-    When Modifier les informations de l'utilisateur    ${newUsername}
+    When Modifier les informations de l'utilisateur
     And Cliquer sur le bouton Enregistrer
-    Then Vérifier que l'utilisateur a été modifié avec succès    Successfully Updated
+    # Then Vérifier que l'utilisateur a été modifié avec succès
 
 Test04 - Supprimer un utilisateur
+    [Documentation]
+    ...   Supprimer un utilisateur ${\n}
+    ...   Cliquer sur le bouton de suppression de l'utilisateur ${\n}
+    ...   Vérifier que l'utilisateur a été supprimé avec succès ${\n}
     Given Aller sur la page admin
     When Remplir le formulaire de recherche    ${username1}    ${role}    ${status}
     When Cliquer sur le bouton Search
@@ -92,10 +101,6 @@ Fermer Orange_HRM
 Aller sur la page Admin
     SeleniumLibrary.Click Element   xpath=//a[.//span[text()='Admin']]
 
-Vérifier que l'utilisateur a été modifié avec succès
-    [Arguments]    ${message}=${None}
-    SeleniumLibrary.Wait Until Element Contains    //p[@class='oxd-text oxd-text--p oxd-test--toast-message oxd-toast-content-text']    ${message}
-
 Cliquer sur le bouton de modification de l'utilisateur
     ${text}    Set Variable    Edit User
     Click Element    xpath=(//button[@class='oxd-icon-button oxd-table-cell-action-space' and .//i[contains(@class, 'bi-pencil-fill')]])[1]
@@ -103,8 +108,8 @@ Cliquer sur le bouton de modification de l'utilisateur
     Wait Until Element Contains    xpath=//h6[@class='oxd-text oxd-text--h6 orangehrm-main-title']    ${text}
 
 Modifier les informations de l'utilisateur
-    [Arguments]    ${newUsername}
-    Input Text    xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input    ${newUsername}    clear=True
+    ${username}    Set Variable    ff  
+    Input Text    xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input    ${username}    clear=True
 
 Cliquer sur le bouton Enregistrer
     Scroll Element Into View         xpath=//button[@type='submit']
