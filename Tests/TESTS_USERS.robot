@@ -29,9 +29,9 @@ Test01 Ajouter un utilisateur
     ...   Remplir le formulaire d'ajout d'utilisateur ${\n}
     ...   Vérifier que l'utilisateur est bien ajouté ${\n}
     Given Aller sur la page Admin
-    When  Clicker sur le bouton "+ Add"
-    And   Remplir le formulaire d'ajout d'utilisateur    ${username1}    ${password1}    ${role}    ${status}   ${employee_name}
-    Then  Vérifier que l'utilisateur est bien ajouté    ${username1}
+    When Clicker sur le bouton "+ Add"
+    And Remplir le formulaire d'ajout d'utilisateur    ${username1}    ${password1}    ${role}    ${status}   ${employee_name}
+    Then Vérifier que l'utilisateur est bien ajouté    ${username1}
 
 Test02 Rechercher un utilisateur
     [Documentation]
@@ -58,7 +58,7 @@ Test03 - Modifier un utilisateur
     And Cliquer sur le bouton de modification de l'utilisateur
     When Modifier les informations de l'utilisateur
     And Cliquer sur le bouton Enregistrer
-    # Then Vérifier que l'utilisateur a été modifié avec succès
+    Then Vérifier que l'utilisateur a été modifié avec succès    Successfully Updated
 
 Test04 - Supprimer un utilisateur
     [Documentation]
@@ -168,6 +168,11 @@ Remplir le formulaire de recherche
 
 Cliquer sur le bouton Search
     SeleniumLibrary.Click Element    xpath=//button[@type='submit']
+
+
+Vérifier que l'utilisateur a été modifié avec succès
+    [Arguments]    ${message}=${None}
+    SeleniumLibrary.Wait Until Element Contains    //p[@class='oxd-text oxd-text--p oxd-text--toast-message oxd-toast-content-text']    ${message}
 
 Vérifier que le message qui s'affiche
     [Arguments]    ${message}=${None}
