@@ -13,19 +13,39 @@ Test Tags           tnr
 ${ORANGE_HRM_URL}    https://opensource-demo.orangehrmlive.com
 ${username}    Admin
 ${password}    admin123
+${username1}   James
+${password1}   laplusbelle49
+${employee_name}   James  Butler
+${role}   Admin
+${status}   Enabled
 
 
 *** Test Cases ***
 
+Test01 Ajouter un utilisateur
+    [Documentation]
+    ...   Ajout d'un utilisateur ${\n}
+    ...   Cliquer sur le bouton "+ Add" dans la section "User Management" ${\n}
+    ...   Remplir le formulaire d'ajout d'utilisateur ${\n}
+    ...   Vérifier que l'utilisateur est bien ajouté ${\n}
+    Given Aller sur la page Admin
+    When Clicker sur le bouton "+ Add"
+    And Remplir le formulaire d'ajout d'utilisateur    ${username1}    ${password1}    ${role}    ${status}   ${employee_name}
+    Then Vérifier que l'utilisateur est bien ajouté    ${username1}
+
 Test02 Rechercher un utilisateur
-    [Documentation]    ...    ${\n}Présentation Exercice
-    ...    /basic-first-form-demo.html
-    ...    ${\n}EXERCICE : saisir le message Hello dans le champ text
-    ...    Cliquer sur le bouton show message
-    ...    vérifier que le message qui s'affiche est bien celui attendu
-    ...    Bonus : Remplacez HELLO par la variable d'environnement USERNAME
+    [Documentation]    ...    ${\n}Rechercher un utilisateur
+    ...    Remplir le formulaire de rechercher
+    ...    Cliquer sur le bouton rechercher
+    ...    Vérifier que
     # Naviguer vers
     Given Aller sur la page Admin
+    When Remplir le formulaire de recherche    Admin    Admin    Enabled
+    When Cliquer sur le bouton Search
+    Then Vérifier que le message qui s'affiche    (1) Record Found
+    Then Vérifier l'utilisateur qui s'affiche
+
+
 
 Test03 - Modifier un utilisateur
     Given Aller sur la page admin
@@ -82,6 +102,68 @@ Modifier les informations de l'utilisateur
 Cliquer sur le bouton Enregistrer
     Scroll Element Into View         xpath=//button[@type='submit']
     Click Element    xpath=//button[@type='submit']
+
+Clicker sur le bouton "+ Add"
+    SeleniumLibrary.Click Element   xpath=//button[@type='button' and @class='oxd-button oxd-button--medium oxd-button--secondary']
+
+Remplir le formulaire d'ajout d'utilisateur
+    [Arguments]    ${username1}    ${password1}    ${role}    ${status}    ${employee_name}
+    # Sélectionner "User Role"
+    SeleniumLibrary.Click Element    xpath=//label[text()='User Role']/following::div[contains(@class, 'oxd-select-text')]
+    SeleniumLibrary.Wait Until Element Is Visible    xpath=//div[@role='option' and contains(normalize-space(), '${role}')]    timeout=10s
+    SeleniumLibrary.Click Element    xpath=//div[@role='option' and contains(normalize-space(), '${role}')]
+
+
+    # Saisir "Employee Name"
+    SeleniumLibrary.Input Text    xpath=//label[text()='Employee Name']/following::input[1]    ${employee_name}
+    SeleniumLibrary.Wait Until Element Is Visible    xpath=//div[@role='option' and contains(normalize-space(), '${employee_name}')]    timeout=10s
+    SeleniumLibrary.Click Element    xpath=//div[@role='option' and contains(normalize-space(), '${employee_name}')]
+
+    # Sélectionner "Status"
+    SeleniumLibrary.Click Element    xpath=//label[text()='Status']/following::div[contains(@class, 'oxd-select-text')]
+    SeleniumLibrary.Wait Until Element Is Visible    xpath=//div[@role='option' and contains(normalize-space(), 'Enabled')]    timeout=10s
+    SeleniumLibrary.Click Element    xpath=//div[@role='option' and contains(normalize-space(), 'Enabled')]
+
+    # Saisir "Username"
+    SeleniumLibrary.Input Text    xpath=//label[text()='Username']/following::input[1]    ${username1}
+
+    # Saisir "Password" et "Confirm Password"
+    SeleniumLibrary.Input Text    xpath=//label[text()='Password']/following::input[1]    ${password1}
+    SeleniumLibrary.Input Text    xpath=//label[text()='Confirm Password']/following::input[1]    ${password1}
+
+    # Cliquer sur "Save"
+    SeleniumLibrary.Click Element    xpath=//button[@type='submit' and text()=' Save ']
+
+Vérifier que l'utilisateur est bien ajouté
+    [Arguments]    ${username1}
+    SeleniumLibrary.Wait Until Page Contains Element    xpath=//div[contains(text(), '${username1}')]    timeout=10s
+    SeleniumLibrary.Page Should Contain Element    xpath=//div[contains(text(), '${username1}')]
+
+Remplir le formulaire de recherche
+    [Arguments]    ${username}=${None}    ${role}=${None}    ${status}=${None}
+    # Remplir le champ username
+    SeleniumLibrary.Input Text    xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input    ${username}
+    # Ouvrir le select et cliquer sur le champ ${status}
+    SeleniumLibrary.Click Element    xpath=//label[text()='User Role']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]
+    SeleniumLibrary.Click Element    xpath=//div[@role='option']//span[text()='${role}']
+    # Ouvrir le select et cliquer sur le champ ${status}
+    SeleniumLibrary.Click Element    xpath=//label[text()='Status']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]
+    SeleniumLibrary.Click Element    xpath=//div[@role='listbox']//span[text()='${status}']
+
+Cliquer sur le bouton Search
+    SeleniumLibrary.Click Element    xpath=//button[@type='submit']
+
+Vérifier que le message qui s'affiche
+    [Arguments]    ${message}=${None}
+    SeleniumLibrary.Wait Until Element Contains    //span[@class='oxd-text oxd-text--span']    ${message}
+
+Vérifier l'utilisateur qui s'affiche
+    ${row} =    Get WebElement    xpath=//div[@role='row' and .//div[text()='jonas Paula']]
+    SeleniumLibrary.Element Should Contain    xpath=.//div[1]    Admin    parent=${row}
+    SeleniumLibrary.Element Should Contain    xpath=.//div[2]    Admin    parent=${row}
+    SeleniumLibrary.Element Should Contain    xpath=.//div[3]    jonas Paula    parent=${row}
+    SeleniumLibrary.Element Should Contain    xpath=.//div[4]    Enabled    parent=${row}
+
 
 Scroll Element To Top
     [Documentation]    Permet de placer l'élément en haut de page avec delta
