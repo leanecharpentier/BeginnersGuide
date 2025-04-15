@@ -27,6 +27,14 @@ Test02 Rechercher un utilisateur
     # Naviguer vers
     Given Aller sur la page Admin
 
+Test03 - Modifier un utilisateur
+    Given Aller sur la page admin
+    When Rechercher un utilisateur
+    And Cliquer sur le bouton de modification de l'utilisateur
+    When Modifier les informations de l'utilisateur
+    And Cliquer sur le bouton Enregistrer
+    # Then Vérifier que l'utilisateur a été modifié avec succès
+
 *** Keywords ***
 Ouvrir Orange_HRM
     [Documentation]
@@ -57,6 +65,23 @@ Fermer Orange_HRM
 
 Aller sur la page Admin
     SeleniumLibrary.Click Element   xpath=//a[.//span[text()='Admin']]
+
+Rechercher un utilisateur
+    [Documentation]    Rechercher un utilisateur dans la liste des utilisateurs
+
+Cliquer sur le bouton de modification de l'utilisateur
+    ${text}    Set Variable    Edit User
+    Click Element    xpath=(//button[@class='oxd-icon-button oxd-table-cell-action-space' and .//i[contains(@class, 'bi-pencil-fill')]])[1]
+
+    Wait Until Element Contains    xpath=//h6[@class='oxd-text oxd-text--h6 orangehrm-main-title']    ${text}
+
+Modifier les informations de l'utilisateur
+    ${username}    Set Variable    ff  
+    Input Text    xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input    ${username}    clear=True
+
+Cliquer sur le bouton Enregistrer
+    Scroll Element Into View         xpath=//button[@type='submit']
+    Click Element    xpath=//button[@type='submit']
 
 Scroll Element To Top
     [Documentation]    Permet de placer l'élément en haut de page avec delta
