@@ -175,18 +175,6 @@ Vérifier l'utilisateur qui s'affiche
     SeleniumLibrary.Element Should Contain    xpath=.//div[3]    jonas Paula    parent=${row}
     SeleniumLibrary.Element Should Contain    xpath=.//div[4]    Enabled    parent=${row}
 
-
-Scroll Element To Top
-    [Documentation]    Permet de placer l'élément en haut de page avec delta
-    ...    Par defaut le delta=0
-    ...    Le delta peut être la hauteur d'un bandeau
-    [Arguments]    ${locator}    ${delta_top}=0
-    SeleniumLibrary.Wait Until Page Contains Element    ${locator}
-    ${el_pos_y}    SeleniumLibrary.Get Vertical Position    ${locator}
-    ${final_y}    BuiltIn.Evaluate    int(${el_pos_y}) -int(${delta_top})
-    SeleniumLibrary.Execute Javascript    window.scrollTo(0, arguments[0])    ARGUMENTS    ${final_y}
-    SeleniumLibrary.Wait Until Element Is Visible    ${locator}
-
 Highlight Element
     [Arguments]    ${locator}
     # Change le style de couleur de l'élément pour le mettre en évidence (le bord en rouge et le fond en jaune)
@@ -208,29 +196,3 @@ Highlight Element
     ...    ARGUMENTS
     ...    ${element}
     ...    ${original_style}
-
-
-Wait Until Element Attribute Contains
-    [Arguments]    ${locator}    ${attribute_name}    ${attribute_expected_value}    ${nb_loop_in_second}=2
-    ${initial_implicit_wait}    Set Selenium Implicit Wait    0
-    FOR    ${counter}    IN RANGE    ${nb_loop_in_second}
-        ${find_element}    Run Keyword And Return Status    SeleniumLibrary.Page Should Contain Element    ${locator}
-        IF    ${find_element}
-            ${attribute_actual_value}    SeleniumLibrary.Get Element Attribute    ${locator}    ${attribute_name}
-            ${comparaison}    Run Keyword And Return Status
-            ...    Should Contain
-            ...    ${attribute_actual_value}
-            ...    ${attribute_expected_value}
-            IF    ${comparaison}    BREAK
-        END
-        Sleep    1s
-    END
-    Set Selenium Implicit Wait    ${initial_implicit_wait}
-    IF    ${find_element} == ${false}    Fail    locator ${locator} not found
-    IF    ${comparaison} == ${false}
-        ${outerHTML}    SeleniumLibrary.Get Element Attribute    ${locator}    outerHTML
-        ${message}    Catenate    locator ${locator} found but the value of attribute ${attribute_name} is different
-        ...    \nExpected=${attribute_expected_value} != Actual=${attribute_actual_value}
-        ...    \n${outerHTML}
-        Fail    ${message}
-    END
