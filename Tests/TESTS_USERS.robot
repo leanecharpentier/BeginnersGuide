@@ -94,7 +94,7 @@ Aller sur la page Admin
 
 Vérifier que l'utilisateur a été modifié avec succès
     [Arguments]    ${message}=${None}
-    SeleniumLibrary.Wait Until Element Contains    //span[@class='oxd-text oxd-text--span']    ${message}
+    SeleniumLibrary.Wait Until Element Contains    //p[@class='oxd-text oxd-text--p oxd-test--toast-message oxd-toast-content-text']    ${message}
 
 Cliquer sur le bouton de modification de l'utilisateur
     ${text}    Set Variable    Edit User
