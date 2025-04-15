@@ -18,6 +18,7 @@ ${password1}   test123
 ${employee_name}   James
 ${role}   Admin
 ${status}   Enabled
+${updated}    Updated
 
 
 *** Test Cases ***
@@ -65,8 +66,9 @@ Test04 - Supprimer un utilisateur
     ...   Supprimer un utilisateur ${\n}
     ...   Cliquer sur le bouton de suppression de l'utilisateur ${\n}
     ...   Vérifier que l'utilisateur a été supprimé avec succès ${\n}
+    ${username_updated}=    Set Variable    ${username1}${updated}
     Given Aller sur la page admin
-    When Remplir le formulaire de recherche    ${username1}    ${role}    ${status}
+    When Remplir le formulaire de recherche    ${username_updated}   ${role}    ${status}
     When Cliquer sur le bouton Search
     And Cliquer sur le bouton de suppression de l'utilisateur
 
@@ -107,9 +109,8 @@ Cliquer sur le bouton de modification de l'utilisateur
 
     Wait Until Element Contains    xpath=//h6[@class='oxd-text oxd-text--h6 orangehrm-main-title']    ${text}
 
-Modifier les informations de l'utilisateur
-    ${username}    Set Variable    ff  
-    Input Text    xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input    ${username}    clear=True
+Modifier les informations de l'utilisateur  
+    Input Text    xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input    ${updated}    clear=True
 
 Cliquer sur le bouton Enregistrer
     Scroll Element Into View         xpath=//button[@type='submit']
