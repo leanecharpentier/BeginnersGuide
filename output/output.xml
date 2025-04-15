@@ -1,238 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.1.1 (Python 3.12.0 on win32)" generated="20250330 19:39:31.078" rpa="false" schemaversion="4">
-<suite id="s1" name="Rappel RBF" source="c:\Users\lucas\OneDrive\Documents\GitHub\BeginnersGuide\Tests\Rappel_RBF.robot">
-<kw name="Log Report And Console" type="SETUP">
-<arg>Global Suite Setup</arg>
-<kw name="Log" library="BuiltIn">
-<arg>${message}</arg>
-<arg>level=${level}</arg>
-<arg>console=True</arg>
-<doc>Logs the given message with the given level.</doc>
-<msg timestamp="20250330 19:39:31.180" level="INFO">Global Suite Setup</msg>
-<status status="PASS" starttime="20250330 19:39:31.164" endtime="20250330 19:39:31.186"/>
+<robot generator="Robot 7.2.2 (Python 3.12.1 on win32)" generated="2025-04-15T13:59:51.425478" rpa="false" schemaversion="5">
+<suite id="s1" name="TESTS USERS" source="c:\Users\leane\Documents\MDS\B3\tests\BeginnersGuide\Tests\TESTS_USERS.robot">
+<test id="s1-t1" name="Test01 Ajouter un utilisateur" line="17">
+<kw name="Ouvrir Orange_HRM" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-04-15T13:59:51.763821" level="INFO">Opening browser 'chrome' to base url 'https://opensource-demo.orangehrmlive.com'.</msg>
+<arg>${ORANGE_HRM_URL}</arg>
+<arg>browser=chrome</arg>
+<arg>options=add_experimental_option('excludeSwitches', ['enable-logging'])</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-04-15T13:59:51.763821" elapsed="3.243444"/>
 </kw>
-<status status="PASS" starttime="20250330 19:39:31.164" endtime="20250330 19:39:31.189"/>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-04-15T13:59:55.007265" elapsed="0.040375"/>
 </kw>
-<test id="s1-t1" name="TC Evaluate" line="403">
-<kw name="testSetup" type="SETUP">
-<kw name="Log Report And Console">
-<arg>${EMPTY}</arg>
-<kw name="Log" library="BuiltIn">
-<arg>${message}</arg>
-<arg>level=${level}</arg>
-<arg>console=True</arg>
-<doc>Logs the given message with the given level.</doc>
-<msg timestamp="20250330 19:39:31.198" level="INFO"/>
-<status status="PASS" starttime="20250330 19:39:31.193" endtime="20250330 19:39:31.199"/>
+<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
+<arg>5s</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2025-04-15T13:59:55.047640" elapsed="0.002517"/>
 </kw>
-<status status="PASS" starttime="20250330 19:39:31.193" endtime="20250330 19:39:31.199"/>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-15T13:59:55.051157" level="INFO">Typing text 'Admin' into text field 'xpath=//input[@name="username"]'.</msg>
+<arg>xpath=//input[@name="username"]</arg>
+<arg>Admin</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T13:59:55.050157" elapsed="0.415642"/>
 </kw>
-<kw name="Log Report And Console">
-<arg>Global Test Setup</arg>
-<kw name="Log" library="BuiltIn">
-<arg>${message}</arg>
-<arg>level=${level}</arg>
-<arg>console=True</arg>
-<doc>Logs the given message with the given level.</doc>
-<msg timestamp="20250330 19:39:31.201" level="INFO">Global Test Setup</msg>
-<status status="PASS" starttime="20250330 19:39:31.201" endtime="20250330 19:39:31.201"/>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-15T13:59:55.466807" level="INFO">Typing text 'admin123' into text field 'xpath=//input[@name="password"]'.</msg>
+<arg>xpath=//input[@name="password"]</arg>
+<arg>admin123</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T13:59:55.466807" elapsed="0.116461"/>
 </kw>
-<status status="PASS" starttime="20250330 19:39:31.199" endtime="20250330 19:39:31.201"/>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T13:59:55.584266" level="INFO">Clicking element 'xpath=//button[@type="submit"]'.</msg>
+<arg>xpath=//button[@type="submit"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T13:59:55.584266" elapsed="0.080375"/>
 </kw>
-<status status="PASS" starttime="20250330 19:39:31.193" endtime="20250330 19:39:31.201"/>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-04-15T13:59:56.623745" level="INFO">${title} = OrangeHRM</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-04-15T13:59:55.664641" elapsed="0.960218"/>
 </kw>
-<kw name="Evaluate" library="BuiltIn">
-<var>${resultat}</var>
-<arg>${myNumber1}+${myNumber2}</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<msg timestamp="20250330 19:39:31.206" level="INFO">${resultat} = 11</msg>
-<status status="PASS" starttime="20250330 19:39:31.206" endtime="20250330 19:39:31.206"/>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>OrangeHRM</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-04-15T13:59:56.625747" elapsed="0.001111"/>
 </kw>
-<kw name="Set Variable" library="BuiltIn">
-<var>${resultat}</var>
-<arg>${myNumber} + 10</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<msg timestamp="20250330 19:39:31.206" level="INFO">${resultat} = 2 + 10</msg>
-<status status="PASS" starttime="20250330 19:39:31.206" endtime="20250330 19:39:31.206"/>
+<doc>Ouverture de Chrome à l'adresse https://opensource-demo.orangehrmlive.com</doc>
+<status status="PASS" start="2025-04-15T13:59:51.762822" elapsed="4.864036"/>
 </kw>
-<kw name="Evaluate" library="BuiltIn">
-<var>${randomNumber}</var>
-<arg>random.randint(0,9)</arg>
-<arg>modules=random</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<msg timestamp="20250330 19:39:31.206" level="INFO">${randomNumber} = 8</msg>
-<status status="PASS" starttime="20250330 19:39:31.206" endtime="20250330 19:39:31.206"/>
+<kw name="Log Location" owner="SeleniumLibrary">
+<msg time="2025-04-15T13:59:56.629651" level="FAIL">Keyword 'SeleniumLibrary.Log Location' expected 0 arguments, got 1.</msg>
+<arg>${ORANGE_HRM_URL}</arg>
+<doc>Logs and returns the current browser window URL.</doc>
+<status status="FAIL" start="2025-04-15T13:59:56.628267" elapsed="0.002520">Keyword 'SeleniumLibrary.Log Location' expected 0 arguments, got 1.</status>
 </kw>
-<kw name="Evaluate" library="BuiltIn">
-<var>${randomNumberList}</var>
-<arg>random.sample(range(1, 11), 4)</arg>
-<arg>modules=random</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<msg timestamp="20250330 19:39:31.217" level="INFO">${randomNumberList} = [10, 3, 8, 7]</msg>
-<status status="PASS" starttime="20250330 19:39:31.217" endtime="20250330 19:39:31.217"/>
+<kw name="Fermer Orange_HRM" type="TEARDOWN">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-04-15T13:59:59.634024" level="INFO">Slept 3 seconds.</msg>
+<arg>3</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-04-15T13:59:56.632796" elapsed="3.001228"/>
 </kw>
-<kw name="Set Variable" library="BuiltIn">
-<var>${min}</var>
-<arg>${1}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<msg timestamp="20250330 19:39:31.224" level="INFO">${min} = 1</msg>
-<status status="PASS" starttime="20250330 19:39:31.223" endtime="20250330 19:39:31.225"/>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-04-15T13:59:59.815661" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2.png"&gt;&lt;img src="selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-04-15T13:59:59.636602" elapsed="0.179571"/>
 </kw>
-<kw name="Set Variable" library="BuiltIn">
-<var>${max}</var>
-<arg>${10}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<msg timestamp="20250330 19:39:31.229" level="INFO">${max} = 10</msg>
-<status status="PASS" starttime="20250330 19:39:31.228" endtime="20250330 19:39:31.229"/>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-04-15T13:59:59.816173" elapsed="2.357198"/>
 </kw>
-<kw name="Evaluate" library="BuiltIn">
-<var>${random}</var>
-<arg>random.randint(${min}, ${max})</arg>
-<arg>modules=random, sys</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<msg timestamp="20250330 19:39:31.229" level="INFO">${random} = 6</msg>
-<status status="PASS" starttime="20250330 19:39:31.229" endtime="20250330 19:39:31.229"/>
+<doc>Fermeture du navigateur
+On laisse un peu de temps pour visualiser l'écran final</doc>
+<status status="PASS" start="2025-04-15T13:59:56.631816" elapsed="5.541555"/>
 </kw>
-<kw name="Evaluate" library="BuiltIn">
-<var>${testTitle}</var>
-<arg>'g'=='l'</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<msg timestamp="20250330 19:39:31.229" level="INFO">${testTitle} = False</msg>
-<status status="PASS" starttime="20250330 19:39:31.229" endtime="20250330 19:39:31.229"/>
-</kw>
-<kw name="Evaluate" library="BuiltIn">
-<var>${testPrice}</var>
-<arg>'h'=='h'</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<msg timestamp="20250330 19:39:31.229" level="INFO">${testPrice} = True</msg>
-<status status="PASS" starttime="20250330 19:39:31.229" endtime="20250330 19:39:31.229"/>
-</kw>
-<kw name="Evaluate" library="BuiltIn">
-<var>${testAll}</var>
-<arg>${testTitle} and ${testPrice}</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<msg timestamp="20250330 19:39:31.242" level="INFO">${testAll} = False</msg>
-<status status="PASS" starttime="20250330 19:39:31.242" endtime="20250330 19:39:31.242"/>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<var>${mail}</var>
-<arg>test@sogeti.com</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<msg timestamp="20250330 19:39:31.242" level="INFO">${mail} = test@sogeti.com</msg>
-<status status="PASS" starttime="20250330 19:39:31.242" endtime="20250330 19:39:31.249"/>
-</kw>
-<kw name="Evaluate" library="BuiltIn">
-<var>${urlEncoded2}</var>
-<arg>urllib.parse.quote("${mail}")</arg>
-<arg>modules=urllib</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<msg timestamp="20250330 19:39:31.249" level="INFO">${urlEncoded2} = test%40sogeti.com</msg>
-<status status="PASS" starttime="20250330 19:39:31.249" endtime="20250330 19:39:31.249"/>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<var>${url}</var>
-<arg>http://www.cwi.nl:80/%7Eguido/Python.html</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<msg timestamp="20250330 19:39:31.249" level="INFO">${url} = http://www.cwi.nl:80/%7Eguido/Python.html</msg>
-<status status="PASS" starttime="20250330 19:39:31.249" endtime="20250330 19:39:31.249"/>
-</kw>
-<kw name="Evaluate" library="BuiltIn">
-<var>${hostname}</var>
-<arg>urllib.parse.urlparse("${url}").hostname</arg>
-<arg>modules=urllib, urllib.parse</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<msg timestamp="20250330 19:39:31.249" level="INFO">${hostname} = www.cwi.nl</msg>
-<status status="PASS" starttime="20250330 19:39:31.249" endtime="20250330 19:39:31.258"/>
-</kw>
-<kw name="testTeardown" type="TEARDOWN">
-<kw name="Log Report And Console">
-<arg>Global Test Teardown</arg>
-<kw name="Log" library="BuiltIn">
-<arg>${message}</arg>
-<arg>level=${level}</arg>
-<arg>console=True</arg>
-<doc>Logs the given message with the given level.</doc>
-<msg timestamp="20250330 19:39:31.258" level="INFO">Global Test Teardown</msg>
-<status status="PASS" starttime="20250330 19:39:31.258" endtime="20250330 19:39:31.258"/>
-</kw>
-<status status="PASS" starttime="20250330 19:39:31.258" endtime="20250330 19:39:31.258"/>
-</kw>
-<kw name="Log Report And Console">
-<arg>${TEST STATUS}</arg>
-<kw name="Log" library="BuiltIn">
-<arg>${message}</arg>
-<arg>level=${level}</arg>
-<arg>console=True</arg>
-<doc>Logs the given message with the given level.</doc>
-<msg timestamp="20250330 19:39:31.258" level="INFO">PASS</msg>
-<status status="PASS" starttime="20250330 19:39:31.258" endtime="20250330 19:39:31.258"/>
-</kw>
-<status status="PASS" starttime="20250330 19:39:31.258" endtime="20250330 19:39:31.258"/>
-</kw>
-<kw name="Log Report And Console">
-<arg>${TEST MESSAGE}</arg>
-<kw name="Log" library="BuiltIn">
-<arg>${message}</arg>
-<arg>level=${level}</arg>
-<arg>console=True</arg>
-<doc>Logs the given message with the given level.</doc>
-<msg timestamp="20250330 19:39:31.258" level="INFO"/>
-<status status="PASS" starttime="20250330 19:39:31.258" endtime="20250330 19:39:31.258"/>
-</kw>
-<status status="PASS" starttime="20250330 19:39:31.258" endtime="20250330 19:39:31.258"/>
-</kw>
-<if>
-<branch type="IF" condition="'${TEST STATUS}' == 'PASS'">
-<kw name="Set Test Message" library="BuiltIn">
-<arg>Test OK\nOn pourait mettre la synthèse des étapes/vérificarions effectuées</arg>
-<doc>Sets message for the current test case.</doc>
-<msg timestamp="20250330 19:39:31.275" level="INFO">Set test message to:
-Test OK
-On pourait mettre la synthèse des étapes/vérificarions effectuées</msg>
-<status status="PASS" starttime="20250330 19:39:31.275" endtime="20250330 19:39:31.275"/>
-</kw>
-<status status="PASS" starttime="20250330 19:39:31.258" endtime="20250330 19:39:31.275"/>
-</branch>
-<status status="PASS" starttime="20250330 19:39:31.258" endtime="20250330 19:39:31.275"/>
-</if>
-<status status="PASS" starttime="20250330 19:39:31.258" endtime="20250330 19:39:31.275"/>
-</kw>
-<doc>Utilisation d'évaluation d'instructions python</doc>
 <tag>tnr</tag>
-<status status="PASS" starttime="20250330 19:39:31.189" endtime="20250330 19:39:31.279">Test OK
-On pourait mettre la synthèse des étapes/vérificarions effectuées</status>
+<status status="FAIL" start="2025-04-15T13:59:51.761822" elapsed="10.413532">Keyword 'SeleniumLibrary.Log Location' expected 0 arguments, got 1.</status>
 </test>
-<kw name="Log Report And Console" type="TEARDOWN">
-<arg>Global Suite Teardown</arg>
-<kw name="Log" library="BuiltIn">
-<arg>${message}</arg>
-<arg>level=${level}</arg>
-<arg>console=True</arg>
-<doc>Logs the given message with the given level.</doc>
-<msg timestamp="20250330 19:39:31.279" level="INFO">Global Suite Teardown</msg>
-<status status="PASS" starttime="20250330 19:39:31.279" endtime="20250330 19:39:31.290"/>
-</kw>
-<status status="PASS" starttime="20250330 19:39:31.279" endtime="20250330 19:39:31.290"/>
-</kw>
-<doc>Permet d'avoir des exemples d'utilisation de Robot Framework
-
-C'est un condensé de tout ce que l'on doit connaitre avant de faire des tests Selenium/Appium
-
-C'est un résumé du User Guide et des keywords indispensables de la librairie Builtin</doc>
-<meta name="Author">eric.mersier@sogeti.com</meta>
-<meta name="Date">18/10/2020</meta>
-<meta name="Version">1.0</meta>
-<status status="PASS" starttime="20250330 19:39:31.089" endtime="20250330 19:39:31.292"/>
+<status status="FAIL" start="2025-04-15T13:59:51.431060" elapsed="10.753702"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="1" fail="0" skip="0">tnr</stat>
+<stat pass="0" fail="1" skip="0">tnr</stat>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="Rappel RBF">Rappel RBF</stat>
+<stat name="TESTS USERS" id="s1" pass="0" fail="1" skip="0">TESTS USERS</stat>
 </suite>
 </statistics>
 <errors>
