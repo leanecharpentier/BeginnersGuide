@@ -179,11 +179,11 @@ Vérifier que le message qui s'affiche
     SeleniumLibrary.Wait Until Element Contains    //span[@class='oxd-text oxd-text--span']    ${message}
 
 Vérifier l'utilisateur qui s'affiche
-    ${row} =    Get WebElement    xpath=//div[@role='row' and .//div[text()='jonas Paula']]
-    SeleniumLibrary.Element Should Contain    xpath=.//div[1]    Admin    parent=${row}
-    SeleniumLibrary.Element Should Contain    xpath=.//div[2]    Admin    parent=${row}
-    SeleniumLibrary.Element Should Contain    xpath=.//div[3]    jonas Paula    parent=${row}
-    SeleniumLibrary.Element Should Contain    xpath=.//div[4]    Enabled    parent=${row}
+    ${row} =    Get WebElement    xpath=//div[@role='row' and .//div[text()='${employee_name}']]
+    SeleniumLibrary.Element Should Contain    xpath=.//div[1]    ${username1}    parent=${row}
+    SeleniumLibrary.Element Should Contain    xpath=.//div[2]    ${role}    parent=${row}
+    SeleniumLibrary.Element Should Contain    xpath=.//div[3]    ${employee_name}    parent=${row}
+    SeleniumLibrary.Element Should Contain    xpath=.//div[4]    ${status}    parent=${row}
 
 Highlight Element
     [Arguments]    ${locator}
