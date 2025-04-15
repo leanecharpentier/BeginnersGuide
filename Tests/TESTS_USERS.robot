@@ -17,6 +17,16 @@ ${password}    admin123
 
 *** Test Cases ***
 
+Test02 Rechercher un utilisateur
+    [Documentation]    ...    ${\n}Présentation Exercice
+    ...    /basic-first-form-demo.html
+    ...    ${\n}EXERCICE : saisir le message Hello dans le champ text
+    ...    Cliquer sur le bouton show message
+    ...    vérifier que le message qui s'affiche est bien celui attendu
+    ...    Bonus : Remplacez HELLO par la variable d'environnement USERNAME
+    # Naviguer vers
+    Given Aller sur la page Admin
+
 *** Keywords ***
 Ouvrir Orange_HRM
     [Documentation]
@@ -44,6 +54,9 @@ Fermer Orange_HRM
     BuiltIn.Sleep    3
     # Capture Page Screenshot
     SeleniumLibrary.Close Browser
+
+Aller sur la page Admin
+    SeleniumLibrary.Click Element   xpath=//a[.//span[text()='Admin']]
 
 Scroll Element To Top
     [Documentation]    Permet de placer l'élément en haut de page avec delta
