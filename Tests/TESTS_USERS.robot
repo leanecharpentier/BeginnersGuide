@@ -13,9 +13,25 @@ Test Tags           tnr
 ${ORANGE_HRM_URL}    https://opensource-demo.orangehrmlive.com
 ${username}    Admin
 ${password}    admin123
+${username1}   James
+${password1}   laplusbelle49
+${employee_name}   James  Butler
+${role}   Admin
+${status}   Enabled
 
 
 *** Test Cases ***
+
+Test01 Ajouter un utilisateur
+    [Documentation]
+    ...   Ajout d'un utilisateur ${\n}
+    ...   Cliquer sur le bouton "+ Add" dans la section "User Management" ${\n}
+    ...   Remplir le formulaire d'ajout d'utilisateur ${\n}
+    ...   Vérifier que l'utilisateur est bien ajouté ${\n}
+    Given Aller sur la page Admin
+    When Clicker sur le bouton "+ Add"
+    And Remplir le formulaire d'ajout d'utilisateur    ${username1}    ${password1}    ${role}    ${status}   ${employee_name}
+    Then Vérifier que l'utilisateur est bien ajouté    ${username1}
 
 Test02 Rechercher un utilisateur
     [Documentation]    ...    ${\n}Rechercher un utilisateur
@@ -61,6 +77,42 @@ Fermer Orange_HRM
 
 Aller sur la page Admin
     SeleniumLibrary.Click Element   xpath=//a[.//span[text()='Admin']]
+
+Clicker sur le bouton "+ Add"
+    SeleniumLibrary.Click Element   xpath=//button[@type='button' and @class='oxd-button oxd-button--medium oxd-button--secondary']
+
+Remplir le formulaire d'ajout d'utilisateur
+    [Arguments]    ${username1}    ${password1}    ${role}    ${status}    ${employee_name}
+    # Sélectionner "User Role"
+    SeleniumLibrary.Click Element    xpath=//label[text()='User Role']/following::div[contains(@class, 'oxd-select-text')]
+    SeleniumLibrary.Wait Until Element Is Visible    xpath=//div[@role='option' and contains(normalize-space(), '${role}')]    timeout=10s
+    SeleniumLibrary.Click Element    xpath=//div[@role='option' and contains(normalize-space(), '${role}')]
+
+
+    # Saisir "Employee Name"
+    SeleniumLibrary.Input Text    xpath=//label[text()='Employee Name']/following::input[1]    ${employee_name}
+    SeleniumLibrary.Wait Until Element Is Visible    xpath=//div[@role='option' and contains(normalize-space(), '${employee_name}')]    timeout=10s
+    SeleniumLibrary.Click Element    xpath=//div[@role='option' and contains(normalize-space(), '${employee_name}')]
+
+    # Sélectionner "Status"
+    SeleniumLibrary.Click Element    xpath=//label[text()='Status']/following::div[contains(@class, 'oxd-select-text')]
+    SeleniumLibrary.Wait Until Element Is Visible    xpath=//div[@role='option' and contains(normalize-space(), 'Enabled')]    timeout=10s
+    SeleniumLibrary.Click Element    xpath=//div[@role='option' and contains(normalize-space(), 'Enabled')]
+
+    # Saisir "Username"
+    SeleniumLibrary.Input Text    xpath=//label[text()='Username']/following::input[1]    ${username1}
+
+    # Saisir "Password" et "Confirm Password"
+    SeleniumLibrary.Input Text    xpath=//label[text()='Password']/following::input[1]    ${password1}
+    SeleniumLibrary.Input Text    xpath=//label[text()='Confirm Password']/following::input[1]    ${password1}
+
+    # Cliquer sur "Save"
+    SeleniumLibrary.Click Element    xpath=//button[@type='submit' and text()=' Save ']
+
+Vérifier que l'utilisateur est bien ajouté
+    [Arguments]    ${username1}
+    SeleniumLibrary.Wait Until Page Contains Element    xpath=//div[contains(text(), '${username1}')]    timeout=10s
+    SeleniumLibrary.Page Should Contain Element    xpath=//div[contains(text(), '${username1}')]
 
 Remplir le formulaire de recherche
     [Arguments]    ${username}=${None}    ${role}=${None}    ${status}=${None}
