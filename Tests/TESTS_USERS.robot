@@ -14,8 +14,8 @@ ${ORANGE_HRM_URL}    https://opensource-demo.orangehrmlive.com
 ${username}    Admin
 ${password}    admin123
 ${username1}   James
-${password1}   laplusbelle49
-${employee_name}   Anisse Desvallois hi
+${password1}   test123
+${employee_name}   James
 ${role}   Admin
 ${status}   Enabled
 
@@ -34,11 +34,11 @@ Test01 Ajouter un utilisateur
     Then Vérifier que l'utilisateur est bien ajouté    ${username1}
 
 Test02 Rechercher un utilisateur
-    [Documentation]    ...    ${\n}Rechercher un utilisateur
-    ...    Remplir le formulaire de rechercher
-    ...    Cliquer sur le bouton rechercher
-    ...    Vérifier que
-    # Naviguer vers
+    [Documentation]
+    ...    Rechercher un utilisateur ${\n}
+    ...    Remplir le formulaire de rechercher ${\n}
+    ...    Cliquer sur le bouton rechercher ${\n}
+    ...    Vérifier que l'utilisateur s'affiche ${\n}
     Given Aller sur la page Admin
     When Remplir le formulaire de recherche    ${username1}    ${role}    ${status}
     When Cliquer sur le bouton Search
@@ -46,6 +46,12 @@ Test02 Rechercher un utilisateur
     Then Vérifier l'utilisateur qui s'affiche
 
 Test03 - Modifier un utilisateur
+    [Documentation]
+    ...   Modifier un utilisateur ${\n}
+    ...   Cliquer sur le bouton de modification de l'utilisateur ${\n}
+    ...   Modifier les informations de l'utilisateur ${\n}
+    ...   Cliquer sur le bouton Enregistrer ${\n}
+    ...   Vérifier que l'utilisateur a été modifié avec succès ${\n}
     Given Aller sur la page admin
     When Remplir le formulaire de recherche    ${username1}    ${role}    ${status}
     When Cliquer sur le bouton Search
@@ -55,6 +61,10 @@ Test03 - Modifier un utilisateur
     # Then Vérifier que l'utilisateur a été modifié avec succès
 
 Test04 - Supprimer un utilisateur
+    [Documentation]
+    ...   Supprimer un utilisateur ${\n}
+    ...   Cliquer sur le bouton de suppression de l'utilisateur ${\n}
+    ...   Vérifier que l'utilisateur a été supprimé avec succès ${\n}
     Given Aller sur la page admin
     When Remplir le formulaire de recherche    ${username1}    ${role}    ${status}
     When Cliquer sur le bouton Search
