@@ -24,7 +24,7 @@ To complete the installation speedly you can run in the CLI `make install`, this
 
 Once the installation is done you can run test with this extention https://marketplace.visualstudio.com/items?itemName=robocorp.robotframework-lsp or with CLI like :
 
-1. with Make, you can use:
+1. with Make, you can use
 
 ```bash
 make test TEST=selenium_00
