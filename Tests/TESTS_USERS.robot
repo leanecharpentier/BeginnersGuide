@@ -18,6 +18,7 @@ ${password1}   laplusbelle49
 ${employee_name}   James  Butler
 ${role}   Admin
 ${status}   Enabled
+${newUsername}    JamesB
 
 
 *** Test Cases ***
@@ -40,7 +41,7 @@ Test02 Rechercher un utilisateur
     ...    Vérifier que
     # Naviguer vers
     Given Aller sur la page Admin
-    When Remplir le formulaire de recherche    Admin    Admin    Enabled
+    When Remplir le formulaire de recherche    ${username1}    ${role}    ${status}
     When Cliquer sur le bouton Search
     Then Vérifier que le message qui s'affiche    (1) Record Found
     Then Vérifier l'utilisateur qui s'affiche
@@ -49,11 +50,12 @@ Test02 Rechercher un utilisateur
 
 Test03 - Modifier un utilisateur
     Given Aller sur la page admin
-    When Rechercher un utilisateur
+    When Remplir le formulaire de recherche    ${username1}    ${role}    ${status}
+    And Cliquer sur le bouton Search
     And Cliquer sur le bouton de modification de l'utilisateur
-    When Modifier les informations de l'utilisateur
+    When Modifier les informations de l'utilisateur    ${newUsername}
     And Cliquer sur le bouton Enregistrer
-    # Then Vérifier que l'utilisateur a été modifié avec succès
+    Then Vérifier que l'utilisateur a été modifié avec succès    Successfully Updated
 
 *** Keywords ***
 Ouvrir Orange_HRM
@@ -86,8 +88,9 @@ Fermer Orange_HRM
 Aller sur la page Admin
     SeleniumLibrary.Click Element   xpath=//a[.//span[text()='Admin']]
 
-Rechercher un utilisateur
-    [Documentation]    Rechercher un utilisateur dans la liste des utilisateurs
+Vérifier que l'utilisateur a été modifié avec succès
+    [Arguments]    ${message}=${None}
+    SeleniumLibrary.Wait Until Element Contains    //span[@class='oxd-text oxd-text--span']    ${message}
 
 Cliquer sur le bouton de modification de l'utilisateur
     ${text}    Set Variable    Edit User
@@ -96,8 +99,8 @@ Cliquer sur le bouton de modification de l'utilisateur
     Wait Until Element Contains    xpath=//h6[@class='oxd-text oxd-text--h6 orangehrm-main-title']    ${text}
 
 Modifier les informations de l'utilisateur
-    ${username}    Set Variable    ff  
-    Input Text    xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input    ${username}    clear=True
+    [Arguments]    ${newUsername}
+    Input Text    xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input    ${newUsername}    clear=True
 
 Cliquer sur le bouton Enregistrer
     Scroll Element Into View         xpath=//button[@type='submit']
