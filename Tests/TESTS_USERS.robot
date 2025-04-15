@@ -18,14 +18,18 @@ ${password}    admin123
 *** Test Cases ***
 
 Test02 Rechercher un utilisateur
-    [Documentation]    ...    ${\n}Présentation Exercice
-    ...    /basic-first-form-demo.html
-    ...    ${\n}EXERCICE : saisir le message Hello dans le champ text
-    ...    Cliquer sur le bouton show message
-    ...    vérifier que le message qui s'affiche est bien celui attendu
-    ...    Bonus : Remplacez HELLO par la variable d'environnement USERNAME
+    [Documentation]    ...    ${\n}Rechercher un utilisateur
+    ...    Remplir le formulaire de rechercher
+    ...    Cliquer sur le bouton rechercher
+    ...    Vérifier que
     # Naviguer vers
     Given Aller sur la page Admin
+    When Remplir le formulaire de recherche    Admin    Admin    Enabled
+    When Cliquer sur le bouton Search
+    Then Vérifier que le message qui s'affiche    (1) Record Found
+    Then Vérifier l'utilisateur qui s'affiche
+
+
 
 *** Keywords ***
 Ouvrir Orange_HRM
@@ -57,6 +61,32 @@ Fermer Orange_HRM
 
 Aller sur la page Admin
     SeleniumLibrary.Click Element   xpath=//a[.//span[text()='Admin']]
+
+Remplir le formulaire de recherche
+    [Arguments]    ${username}=${None}    ${role}=${None}    ${status}=${None}
+    # Remplir le champ username
+    SeleniumLibrary.Input Text    xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input    ${username}
+    # Ouvrir le select et cliquer sur le champ ${status}
+    SeleniumLibrary.Click Element    xpath=//label[text()='User Role']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]
+    SeleniumLibrary.Click Element    xpath=//div[@role='option']//span[text()='${role}']
+    # Ouvrir le select et cliquer sur le champ ${status}
+    SeleniumLibrary.Click Element    xpath=//label[text()='Status']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]
+    SeleniumLibrary.Click Element    xpath=//div[@role='listbox']//span[text()='${status}']
+
+Cliquer sur le bouton Search
+    SeleniumLibrary.Click Element    xpath=//button[@type='submit']
+
+Vérifier que le message qui s'affiche
+    [Arguments]    ${message}=${None}
+    SeleniumLibrary.Wait Until Element Contains    //span[@class='oxd-text oxd-text--span']    ${message}
+
+Vérifier l'utilisateur qui s'affiche
+    ${row} =    Get WebElement    xpath=//div[@role='row' and .//div[text()='jonas Paula']]
+    SeleniumLibrary.Element Should Contain    xpath=.//div[1]    Admin    parent=${row}
+    SeleniumLibrary.Element Should Contain    xpath=.//div[2]    Admin    parent=${row}
+    SeleniumLibrary.Element Should Contain    xpath=.//div[3]    jonas Paula    parent=${row}
+    SeleniumLibrary.Element Should Contain    xpath=.//div[4]    Enabled    parent=${row}
+
 
 Scroll Element To Top
     [Documentation]    Permet de placer l'élément en haut de page avec delta
