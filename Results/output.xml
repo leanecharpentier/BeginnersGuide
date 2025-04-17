@@ -1,27 +1,942 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.1.2 (Python 3.7.1 on win32)" generated="20200206 13:41:35.509" rpa="false">
-<suite id="s1" name="My First" source="C:\Users\JohnDoe\Documents\RobotFW\my_first.robot">
-<test id="s1-t1" name="My First Robot Test">
-<kw name="Log To Console" library="BuiltIn">
-<doc>Logs the given message to the console.</doc>
-<arguments>
-<arg>Hello Robot World!</arg>
-</arguments>
-<status status="PASS" starttime="20200206 13:41:35.589" endtime="20200206 13:41:35.590"></status>
+<robot generator="Robot 7.2.2 (Python 3.10.11 on win32)" generated="2025-04-15T16:44:44.636005" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="C:\Users\leagr\OneDrive\Documents\BeginnersGuide\Tests">
+<suite id="s1-s1" name="TESTS USERS" source="C:\Users\leagr\OneDrive\Documents\BeginnersGuide\Tests\TESTS_USERS.robot">
+<test id="s1-s1-t1" name="Test01 Ajouter un utilisateur" line="25">
+<kw name="Ouvrir Orange_HRM" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:44.785191" level="INFO">Opening browser 'chrome' to base url 'https://opensource-demo.orangehrmlive.com'.</msg>
+<arg>${ORANGE_HRM_URL}</arg>
+<arg>browser=chrome</arg>
+<arg>options=add_experimental_option('excludeSwitches', ['enable-logging'])</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-04-15T16:44:44.785191" elapsed="3.426436"/>
 </kw>
-<status status="PASS" starttime="20200206 13:41:35.585" endtime="20200206 13:41:35.590" critical="yes"></status>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-04-15T16:44:48.211627" elapsed="0.027039"/>
+</kw>
+<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
+<arg>5s</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2025-04-15T16:44:48.238666" elapsed="0.001136"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:48.239802" level="INFO">Typing text 'Admin' into text field 'xpath=//input[@name="username"]'.</msg>
+<arg>xpath=//input[@name="username"]</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:44:48.239802" elapsed="0.296859"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:48.537661" level="INFO">Typing text 'admin123' into text field 'xpath=//input[@name="password"]'.</msg>
+<arg>xpath=//input[@name="password"]</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:44:48.537661" elapsed="0.053996"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:48.591657" level="INFO">Clicking element 'xpath=//button[@type="submit"]'.</msg>
+<arg>xpath=//button[@type="submit"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:44:48.591657" elapsed="0.030330"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:48.624986" level="INFO">${title} = OrangeHRM</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-04-15T16:44:48.622979" elapsed="0.002007"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>OrangeHRM</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-04-15T16:44:48.624986" elapsed="0.000993"/>
+</kw>
+<doc>Ouverture de Chrome à l'adresse https://opensource-demo.orangehrmlive.com
+Connexion à la plateforme OrangeHRM avec les identifiants Admin/admin123</doc>
+<status status="PASS" start="2025-04-15T16:44:44.785191" elapsed="3.840788"/>
+</kw>
+<kw name="Given Aller sur la page Admin">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:48.625979" level="INFO">Clicking element 'xpath=//a[.//span[text()='Admin']]'.</msg>
+<arg>xpath=//a[.//span[text()='Admin']]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:44:48.625979" elapsed="1.964903"/>
+</kw>
+<status status="PASS" start="2025-04-15T16:44:48.625979" elapsed="1.964903"/>
+</kw>
+<kw name="When Clicker sur le bouton &quot;+ Add&quot;">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:50.591877" level="INFO">Clicking element 'xpath=//button[@type='button' and @class='oxd-button oxd-button--medium oxd-button--secondary']'.</msg>
+<arg>xpath=//button[@type='button' and @class='oxd-button oxd-button--medium oxd-button--secondary']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:44:50.591877" elapsed="0.586243"/>
+</kw>
+<status status="PASS" start="2025-04-15T16:44:50.591877" elapsed="0.586243"/>
+</kw>
+<kw name="And Remplir le formulaire d'ajout d'utilisateur">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:51.179123" level="INFO">Clicking element 'xpath=//label[text()='User Role']/following::div[contains(@class, 'oxd-select-text')]'.</msg>
+<arg>xpath=//label[text()='User Role']/following::div[contains(@class, 'oxd-select-text')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:44:51.179123" elapsed="0.233100"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[@role='option' and contains(normalize-space(), '${role}')]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-04-15T16:44:51.413222" elapsed="0.011136"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:51.425293" level="INFO">Clicking element 'xpath=//div[@role='option' and contains(normalize-space(), 'Admin')]'.</msg>
+<arg>xpath=//div[@role='option' and contains(normalize-space(), '${role}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:44:51.424358" elapsed="0.028582"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:51.453945" level="INFO">Typing text 'James' into text field 'xpath=//label[text()='Employee Name']/following::input[1]'.</msg>
+<arg>xpath=//label[text()='Employee Name']/following::input[1]</arg>
+<arg>${employee_name}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:44:51.452940" elapsed="0.046768"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[@role='option' and contains(normalize-space(), '${employee_name}')]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-04-15T16:44:51.499708" elapsed="1.109329"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:52.609394" level="INFO">Clicking element 'xpath=//div[@role='option' and contains(normalize-space(), 'James')]'.</msg>
+<arg>xpath=//div[@role='option' and contains(normalize-space(), '${employee_name}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:44:52.609394" elapsed="0.067363"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:52.676757" level="INFO">Clicking element 'xpath=//label[text()='Status']/following::div[contains(@class, 'oxd-select-text')]'.</msg>
+<arg>xpath=//label[text()='Status']/following::div[contains(@class, 'oxd-select-text')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:44:52.676757" elapsed="0.029194"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[@role='option' and contains(normalize-space(), 'Enabled')]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-04-15T16:44:52.705951" elapsed="0.013002"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:52.720952" level="INFO">Clicking element 'xpath=//div[@role='option' and contains(normalize-space(), 'Enabled')]'.</msg>
+<arg>xpath=//div[@role='option' and contains(normalize-space(), 'Enabled')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:44:52.719952" elapsed="0.039711"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:52.761669" level="INFO">Typing text 'James' into text field 'xpath=//label[text()='Username']/following::input[1]'.</msg>
+<arg>xpath=//label[text()='Username']/following::input[1]</arg>
+<arg>${username1}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:44:52.760669" elapsed="0.064248"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:52.824917" level="INFO">Typing text 'test123' into text field 'xpath=//label[text()='Password']/following::input[1]'.</msg>
+<arg>xpath=//label[text()='Password']/following::input[1]</arg>
+<arg>${password1}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:44:52.824917" elapsed="0.108036"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:52.933945" level="INFO">Typing text 'test123' into text field 'xpath=//label[text()='Confirm Password']/following::input[1]'.</msg>
+<arg>xpath=//label[text()='Confirm Password']/following::input[1]</arg>
+<arg>${password1}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:44:52.932953" elapsed="0.114726"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:53.048684" level="INFO">Clicking element 'xpath=//button[@type='submit' and text()=' Save ']'.</msg>
+<arg>xpath=//button[@type='submit' and text()=' Save ']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:44:53.047679" elapsed="0.065636"/>
+</kw>
+<arg>${username1}</arg>
+<arg>${password1}</arg>
+<arg>${role}</arg>
+<arg>${status}</arg>
+<arg>${employee_name}</arg>
+<status status="PASS" start="2025-04-15T16:44:51.179123" elapsed="1.934192"/>
+</kw>
+<kw name="Then Vérifier que l'utilisateur est bien ajouté">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>xpath=//div[contains(text(), '${username1}')]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-04-15T16:44:53.116323" elapsed="4.484533"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:44:57.636757" level="INFO">Current page contains element 'xpath=//div[contains(text(), 'James')]'.</msg>
+<arg>xpath=//div[contains(text(), '${username1}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2025-04-15T16:44:57.601856" elapsed="0.034901"/>
+</kw>
+<arg>${username1}</arg>
+<status status="PASS" start="2025-04-15T16:44:53.115322" elapsed="4.522429"/>
+</kw>
+<kw name="Fermer Orange_HRM" type="TEARDOWN">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-04-15T16:45:00.645052" level="INFO">Slept 3 seconds.</msg>
+<arg>3</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-04-15T16:44:57.639907" elapsed="3.006139"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-04-15T16:45:00.647047" elapsed="2.391991"/>
+</kw>
+<doc>Fermeture du navigateur
+On laisse un peu de temps pour visualiser l'écran final</doc>
+<status status="PASS" start="2025-04-15T16:44:57.638751" elapsed="5.400287"/>
+</kw>
+<doc>Ajout d'un utilisateur 
+
+Cliquer sur le bouton "+ Add" dans la section "User Management" 
+
+Remplir le formulaire d'ajout d'utilisateur 
+
+Vérifier que l'utilisateur est bien ajouté 
+</doc>
+<tag>tnr</tag>
+<status status="PASS" start="2025-04-15T16:44:44.784199" elapsed="18.256091"/>
 </test>
-<status status="PASS" starttime="20200206 13:41:35.512" endtime="20200206 13:41:35.592"></status>
+<test id="s1-s1-t2" name="Test02 Rechercher un utilisateur" line="36">
+<kw name="Ouvrir Orange_HRM" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:03.045293" level="INFO">Opening browser 'chrome' to base url 'https://opensource-demo.orangehrmlive.com'.</msg>
+<arg>${ORANGE_HRM_URL}</arg>
+<arg>browser=chrome</arg>
+<arg>options=add_experimental_option('excludeSwitches', ['enable-logging'])</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-04-15T16:45:03.044288" elapsed="3.538929"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-04-15T16:45:06.583217" elapsed="0.025357"/>
+</kw>
+<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
+<arg>5s</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2025-04-15T16:45:06.608574" elapsed="0.001725"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:06.611351" level="INFO">Typing text 'Admin' into text field 'xpath=//input[@name="username"]'.</msg>
+<arg>xpath=//input[@name="username"]</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:06.610299" elapsed="0.303602"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:06.913901" level="INFO">Typing text 'admin123' into text field 'xpath=//input[@name="password"]'.</msg>
+<arg>xpath=//input[@name="password"]</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:06.913901" elapsed="0.051956"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:06.965857" level="INFO">Clicking element 'xpath=//button[@type="submit"]'.</msg>
+<arg>xpath=//button[@type="submit"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:06.965857" elapsed="1.223688"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:08.194552" level="INFO">${title} = OrangeHRM</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-04-15T16:45:08.189545" elapsed="0.005007"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>OrangeHRM</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-04-15T16:45:08.194552" elapsed="0.000000"/>
+</kw>
+<doc>Ouverture de Chrome à l'adresse https://opensource-demo.orangehrmlive.com
+Connexion à la plateforme OrangeHRM avec les identifiants Admin/admin123</doc>
+<status status="PASS" start="2025-04-15T16:45:03.043302" elapsed="5.151250"/>
+</kw>
+<kw name="Given Aller sur la page Admin">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:08.195547" level="INFO">Clicking element 'xpath=//a[.//span[text()='Admin']]'.</msg>
+<arg>xpath=//a[.//span[text()='Admin']]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:08.195547" elapsed="1.283895"/>
+</kw>
+<status status="PASS" start="2025-04-15T16:45:08.195547" elapsed="1.284894"/>
+</kw>
+<kw name="When Remplir le formulaire de recherche">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:09.481442" level="INFO">Typing text 'James' into text field 'xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input'.</msg>
+<arg>xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:09.480441" elapsed="0.329673"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:09.810114" level="INFO">Clicking element 'xpath=//label[text()='User Role']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]'.</msg>
+<arg>xpath=//label[text()='User Role']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:09.810114" elapsed="0.095717"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:09.906826" level="INFO">Clicking element 'xpath=//div[@role='option']//span[text()='Admin']'.</msg>
+<arg>xpath=//div[@role='option']//span[text()='${role}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:09.905831" elapsed="0.114518"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:10.021350" level="INFO">Clicking element 'xpath=//label[text()='Status']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]'.</msg>
+<arg>xpath=//label[text()='Status']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:10.020349" elapsed="0.101328"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:10.121677" level="INFO">Clicking element 'xpath=//div[@role='listbox']//span[text()='Enabled']'.</msg>
+<arg>xpath=//div[@role='listbox']//span[text()='${status}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:10.121677" elapsed="0.196872"/>
+</kw>
+<arg>${username1}</arg>
+<arg>${role}</arg>
+<arg>${status}</arg>
+<status status="PASS" start="2025-04-15T16:45:09.480441" elapsed="0.839109"/>
+</kw>
+<kw name="When Cliquer sur le bouton Search">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:10.320550" level="INFO">Clicking element 'xpath=//button[@type='submit']'.</msg>
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:10.320550" elapsed="0.109964"/>
+</kw>
+<status status="PASS" start="2025-04-15T16:45:10.319550" elapsed="0.110964"/>
+</kw>
+<kw name="Then Vérifier que le message qui s'affiche">
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>//span[@class='oxd-text oxd-text--span']</arg>
+<arg>${message}</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2025-04-15T16:45:10.431596" elapsed="0.315254"/>
+</kw>
+<arg>(1) Record Found</arg>
+<status status="PASS" start="2025-04-15T16:45:10.431596" elapsed="0.315254"/>
+</kw>
+<kw name="Then Vérifier l'utilisateur qui s'affiche">
+<msg time="2025-04-15T16:45:10.747849" level="FAIL">Keyword 'Vérifier l'utilisateur qui s'affiche' expected 4 arguments, got 0.</msg>
+<status status="FAIL" start="2025-04-15T16:45:10.747849" elapsed="0.000000">Keyword 'Vérifier l'utilisateur qui s'affiche' expected 4 arguments, got 0.</status>
+</kw>
+<kw name="Fermer Orange_HRM" type="TEARDOWN">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-04-15T16:45:13.752028" level="INFO">Slept 3 seconds.</msg>
+<arg>3</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-04-15T16:45:10.748856" elapsed="3.003172"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-04-15T16:45:13.752028" elapsed="2.098230"/>
+</kw>
+<doc>Fermeture du navigateur
+On laisse un peu de temps pour visualiser l'écran final</doc>
+<status status="PASS" start="2025-04-15T16:45:10.748856" elapsed="5.102402"/>
+</kw>
+<doc>Rechercher un utilisateur 
+
+Remplir le formulaire de rechercher 
+
+Cliquer sur le bouton rechercher 
+
+Vérifier que l'utilisateur s'affiche 
+</doc>
+<tag>tnr</tag>
+<status status="FAIL" start="2025-04-15T16:45:03.042203" elapsed="12.809055">Keyword 'Vérifier l'utilisateur qui s'affiche' expected 4 arguments, got 0.</status>
+</test>
+<test id="s1-s1-t3" name="Test03 - Modifier un utilisateur" line="48">
+<kw name="Ouvrir Orange_HRM" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:15.854256" level="INFO">Opening browser 'chrome' to base url 'https://opensource-demo.orangehrmlive.com'.</msg>
+<arg>${ORANGE_HRM_URL}</arg>
+<arg>browser=chrome</arg>
+<arg>options=add_experimental_option('excludeSwitches', ['enable-logging'])</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-04-15T16:45:15.854256" elapsed="3.144129"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-04-15T16:45:18.999385" elapsed="0.034528"/>
+</kw>
+<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
+<arg>5s</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2025-04-15T16:45:19.033913" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:19.033913" level="INFO">Typing text 'Admin' into text field 'xpath=//input[@name="username"]'.</msg>
+<arg>xpath=//input[@name="username"]</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:19.033913" elapsed="0.473686"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:19.507599" level="INFO">Typing text 'admin123' into text field 'xpath=//input[@name="password"]'.</msg>
+<arg>xpath=//input[@name="password"]</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:19.507599" elapsed="0.042809"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:19.550408" level="INFO">Clicking element 'xpath=//button[@type="submit"]'.</msg>
+<arg>xpath=//button[@type="submit"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:19.550408" elapsed="0.036699"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:20.682254" level="INFO">${title} = OrangeHRM</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-04-15T16:45:19.587107" elapsed="1.096641"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>OrangeHRM</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-04-15T16:45:20.683748" elapsed="0.000000"/>
+</kw>
+<doc>Ouverture de Chrome à l'adresse https://opensource-demo.orangehrmlive.com
+Connexion à la plateforme OrangeHRM avec les identifiants Admin/admin123</doc>
+<status status="PASS" start="2025-04-15T16:45:15.853256" elapsed="4.830492"/>
+</kw>
+<kw name="Given Aller sur la page admin">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:20.684761" level="INFO">Clicking element 'xpath=//a[.//span[text()='Admin']]'.</msg>
+<arg>xpath=//a[.//span[text()='Admin']]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:20.684761" elapsed="1.818690"/>
+</kw>
+<status status="PASS" start="2025-04-15T16:45:20.683748" elapsed="1.819703"/>
+</kw>
+<kw name="When Remplir le formulaire de recherche">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:22.505443" level="INFO">Typing text 'James' into text field 'xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input'.</msg>
+<arg>xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:22.504442" elapsed="1.086348"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:23.591787" level="INFO">Clicking element 'xpath=//label[text()='User Role']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]'.</msg>
+<arg>xpath=//label[text()='User Role']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:23.591787" elapsed="0.148007"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:23.740930" level="INFO">Clicking element 'xpath=//div[@role='option']//span[text()='Admin']'.</msg>
+<arg>xpath=//div[@role='option']//span[text()='${role}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:23.739794" elapsed="0.083575"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:23.824369" level="INFO">Clicking element 'xpath=//label[text()='Status']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]'.</msg>
+<arg>xpath=//label[text()='Status']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:23.823369" elapsed="0.088453"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:23.912833" level="INFO">Clicking element 'xpath=//div[@role='listbox']//span[text()='Enabled']'.</msg>
+<arg>xpath=//div[@role='listbox']//span[text()='${status}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:23.912833" elapsed="0.084699"/>
+</kw>
+<arg>${username1}</arg>
+<arg>${role}</arg>
+<arg>${status}</arg>
+<status status="PASS" start="2025-04-15T16:45:22.504442" elapsed="1.493090"/>
+</kw>
+<kw name="When Cliquer sur le bouton Search">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:23.998540" level="INFO">Clicking element 'xpath=//button[@type='submit']'.</msg>
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:23.998540" elapsed="0.162796"/>
+</kw>
+<status status="PASS" start="2025-04-15T16:45:23.998540" elapsed="0.163798"/>
+</kw>
+<kw name="And Cliquer sur le bouton de modification de l'utilisateur">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-04-15T16:45:24.163341" level="INFO">${text} = Edit User</msg>
+<var>${text}</var>
+<arg>Edit User</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-04-15T16:45:24.163341" elapsed="0.000000"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:24.164336" level="INFO">Clicking element 'xpath=(//button[@class='oxd-icon-button oxd-table-cell-action-space' and .//i[contains(@class, 'bi-pencil-fill')]])[1]'.</msg>
+<msg time="2025-04-15T16:45:24.673557" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-7.png"&gt;&lt;img src="selenium-screenshot-7.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-04-15T16:45:24.674930" level="FAIL">StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=135.0.7049.85); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF6252B5335+78597]
+	GetHandleVerifier [0x00007FF6252B5390+78688]
+	(No symbol) [0x00007FF6250691AA]
+	(No symbol) [0x00007FF625070ABC]
+	(No symbol) [0x00007FF625073B1C]
+	(No symbol) [0x00007FF625073BEF]
+	(No symbol) [0x00007FF6250C4139]
+	(No symbol) [0x00007FF6250C1AE1]
+	(No symbol) [0x00007FF6250C0A42]
+	(No symbol) [0x00007FF6250B2204]
+	(No symbol) [0x00007FF6250E70EA]
+	(No symbol) [0x00007FF6250B1AB6]
+	(No symbol) [0x00007FF6250E7300]
+	(No symbol) [0x00007FF62510F2BB]
+	(No symbol) [0x00007FF6250E6EC3]
+	(No symbol) [0x00007FF6250B03F8]
+	(No symbol) [0x00007FF6250B1163]
+	GetHandleVerifier [0x00007FF62555EEED+2870973]
+	GetHandleVerifier [0x00007FF625559698+2848360]
+	GetHandleVerifier [0x00007FF625576973+2967875]
+	GetHandleVerifier [0x00007FF6252D017A+188746]
+	GetHandleVerifier [0x00007FF6252D845F+222255]
+	GetHandleVerifier [0x00007FF6252BD2B4+111236]
+	GetHandleVerifier [0x00007FF6252BD462+111666]
+	GetHandleVerifier [0x00007FF6252A3589+5465]
+	BaseThreadInitThunk [0x00007FF8B905E8D7+23]
+	RtlUserThreadStart [0x00007FF8BA8F14FC+44]
+</msg>
+<arg>xpath=(//button[@class='oxd-icon-button oxd-table-cell-action-space' and .//i[contains(@class, 'bi-pencil-fill')]])[1]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="FAIL" start="2025-04-15T16:45:24.163341" elapsed="0.514928">StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=135.0.7049.85); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF6252B5335+78597]
+	GetHandleVerifier [0x00007FF6252B5390+78688]
+	(No symbol) [0x00007FF6250691AA]
+	(No symbol) [0x00007FF625070ABC]
+	(No symbol) [0x00007FF625073B1C]
+	(No symbol) [0x00007FF625073BEF]
+	(No symbol) [0x00007FF6250C4139]
+	(No symbol) [0x00007FF6250C1AE1]
+	(No symbol) [0x00007FF6250C0A42]
+	(No symbol) [0x00007FF6250B2204]
+	(No symbol) [0x00007FF6250E70EA]
+	(No symbol) [0x00007FF6250B1AB6]
+	(No symbol) [0x00007FF6250E7300]
+	(No symbol) [0x00007FF62510F2BB]
+	(No symbol) [0x00007FF6250E6EC3]
+	(No symbol) [0x00007FF6250B03F8]
+	(No symbol) [0x00007FF6250B1163]
+	GetHandleVerifier [0x00007FF62555EEED+2870973]
+	GetHandleVerifier [0x00007FF625559698+2848360]
+	GetHandleVerifier [0x00007FF625576973+2967875]
+	GetHandleVerifier [0x00007FF6252D017A+188746]
+	GetHandleVerifier [0x00007FF6252D845F+222255]
+	GetHandleVerifier [0x00007FF6252BD2B4+111236]
+	GetHandleVerifier [0x00007FF6252BD462+111666]
+	GetHandleVerifier [0x00007FF6252A3589+5465]
+	BaseThreadInitThunk [0x00007FF8B905E8D7+23]
+	RtlUserThreadStart [0x00007FF8BA8F14FC+44]
+</status>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>xpath=//h6[@class='oxd-text oxd-text--h6 orangehrm-main-title']</arg>
+<arg>${text}</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="NOT RUN" start="2025-04-15T16:45:24.678269" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2025-04-15T16:45:24.162338" elapsed="0.516931">StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=135.0.7049.85); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF6252B5335+78597]
+	GetHandleVerifier [0x00007FF6252B5390+78688]
+	(No symbol) [0x00007FF6250691AA]
+	(No symbol) [0x00007FF625070ABC]
+	(No symbol) [0x00007FF625073B1C]
+	(No symbol) [0x00007FF625073BEF]
+	(No symbol) [0x00007FF6250C4139]
+	(No symbol) [0x00007FF6250C1AE1]
+	(No symbol) [0x00007FF6250C0A42]
+	(No symbol) [0x00007FF6250B2204]
+	(No symbol) [0x00007FF6250E70EA]
+	(No symbol) [0x00007FF6250B1AB6]
+	(No symbol) [0x00007FF6250E7300]
+	(No symbol) [0x00007FF62510F2BB]
+	(No symbol) [0x00007FF6250E6EC3]
+	(No symbol) [0x00007FF6250B03F8]
+	(No symbol) [0x00007FF6250B1163]
+	GetHandleVerifier [0x00007FF62555EEED+2870973]
+	GetHandleVerifier [0x00007FF625559698+2848360]
+	GetHandleVerifier [0x00007FF625576973+2967875]
+	GetHandleVerifier [0x00007FF6252D017A+188746]
+	GetHandleVerifier [0x00007FF6252D845F+222255]
+	GetHandleVerifier [0x00007FF6252BD2B4+111236]
+	GetHandleVerifier [0x00007FF6252BD462+111666]
+	GetHandleVerifier [0x00007FF6252A3589+5465]
+	BaseThreadInitThunk [0x00007FF8B905E8D7+23]
+	RtlUserThreadStart [0x00007FF8BA8F14FC+44]
+</status>
+</kw>
+<kw name="When Modifier les informations de l'utilisateur">
+<status status="NOT RUN" start="2025-04-15T16:45:24.679269" elapsed="0.000000"/>
+</kw>
+<kw name="And Cliquer sur le bouton Enregistrer">
+<status status="NOT RUN" start="2025-04-15T16:45:24.680628" elapsed="0.000000"/>
+</kw>
+<kw name="Then Vérifier que l'utilisateur a été modifié avec succès">
+<arg>Successfully Updated</arg>
+<status status="NOT RUN" start="2025-04-15T16:45:24.680628" elapsed="0.001101"/>
+</kw>
+<kw name="Fermer Orange_HRM" type="TEARDOWN">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-04-15T16:45:27.689622" level="INFO">Slept 3 seconds.</msg>
+<arg>3</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-04-15T16:45:24.682728" elapsed="3.006894"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-04-15T16:45:27.690638" elapsed="2.289161"/>
+</kw>
+<doc>Fermeture du navigateur
+On laisse un peu de temps pour visualiser l'écran final</doc>
+<status status="PASS" start="2025-04-15T16:45:24.682728" elapsed="5.297071"/>
+</kw>
+<doc>Modifier un utilisateur 
+
+Cliquer sur le bouton de modification de l'utilisateur 
+
+Modifier les informations de l'utilisateur 
+
+Cliquer sur le bouton Enregistrer 
+
+Vérifier que l'utilisateur a été modifié avec succès 
+</doc>
+<tag>tnr</tag>
+<status status="FAIL" start="2025-04-15T16:45:15.852256" elapsed="14.128108">StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=135.0.7049.85); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF6252B5335+78597]
+	GetHandleVerifier [0x00007FF6252B5390+78688]
+	(No symbol) [0x00007FF6250691AA]
+	(No symbol) [0x00007FF625070ABC]
+	(No symbol) [0x00007FF625073B1C]
+	(No symbol) [0x00007FF625073BEF]
+	(No symbol) [0x00007FF6250C4139]
+	(No symbol) [0x00007FF6250C1AE1]
+	(No symbol) [0x00007FF6250C0A42]
+	(No symbol) [0x00007FF6250B2204]
+	(No symbol) [0x00007FF6250E70EA]
+	(No symbol) [0x00007FF6250B1AB6]
+	(No symbol) [0x00007FF6250E7300]
+	(No symbol) [0x00007FF62510F2BB]
+	(No symbol) [0x00007FF6250E6EC3]
+	(No symbol) [0x00007FF6250B03F8]
+	(No symbol) [0x00007FF6250B1163]
+	GetHandleVerifier [0x00007FF62555EEED+2870973]
+	GetHandleVerifier [0x00007FF625559698+2848360]
+	GetHandleVerifier [0x00007FF625576973+2967875]
+	GetHandleVerifier [0x00007FF6252D017A+188746]
+	GetHandleVerifier [0x00007FF6252D845F+222255]
+	GetHandleVerifier [0x00007FF6252BD2B4+111236]
+	GetHandleVerifier [0x00007FF6252BD462+111666]
+	GetHandleVerifier [0x00007FF6252A3589+5465]
+	BaseThreadInitThunk [0x00007FF8B905E8D7+23]
+	RtlUserThreadStart [0x00007FF8BA8F14FC+44]
+</status>
+</test>
+<test id="s1-s1-t4" name="Test04 - Supprimer un utilisateur" line="63">
+<kw name="Ouvrir Orange_HRM" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:29.982371" level="INFO">Opening browser 'chrome' to base url 'https://opensource-demo.orangehrmlive.com'.</msg>
+<arg>${ORANGE_HRM_URL}</arg>
+<arg>browser=chrome</arg>
+<arg>options=add_experimental_option('excludeSwitches', ['enable-logging'])</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-04-15T16:45:29.982371" elapsed="3.987296"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-04-15T16:45:33.970668" elapsed="0.084229"/>
+</kw>
+<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
+<arg>5s</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2025-04-15T16:45:34.054897" elapsed="0.001000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:34.055897" level="INFO">Typing text 'Admin' into text field 'xpath=//input[@name="username"]'.</msg>
+<arg>xpath=//input[@name="username"]</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:34.055897" elapsed="0.324837"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:34.380734" level="INFO">Typing text 'admin123' into text field 'xpath=//input[@name="password"]'.</msg>
+<arg>xpath=//input[@name="password"]</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:34.380734" elapsed="0.047076"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:34.428810" level="INFO">Clicking element 'xpath=//button[@type="submit"]'.</msg>
+<arg>xpath=//button[@type="submit"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:34.428810" elapsed="0.031929"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:34.464143" level="INFO">${title} = OrangeHRM</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-04-15T16:45:34.460739" elapsed="0.003404"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>OrangeHRM</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-04-15T16:45:34.464143" elapsed="0.000000"/>
+</kw>
+<doc>Ouverture de Chrome à l'adresse https://opensource-demo.orangehrmlive.com
+Connexion à la plateforme OrangeHRM avec les identifiants Admin/admin123</doc>
+<status status="PASS" start="2025-04-15T16:45:29.981371" elapsed="4.482772"/>
+</kw>
+<kw name="Given Aller sur la page admin">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:34.464143" level="INFO">Clicking element 'xpath=//a[.//span[text()='Admin']]'.</msg>
+<arg>xpath=//a[.//span[text()='Admin']]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:34.464143" elapsed="2.414718"/>
+</kw>
+<status status="PASS" start="2025-04-15T16:45:34.464143" elapsed="2.415714"/>
+</kw>
+<kw name="When Remplir le formulaire de recherche">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:36.881100" level="INFO">Typing text 'James' into text field 'xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input'.</msg>
+<arg>xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:36.881100" elapsed="0.845448"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:37.727553" level="INFO">Clicking element 'xpath=//label[text()='User Role']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]'.</msg>
+<arg>xpath=//label[text()='User Role']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:37.727553" elapsed="0.211685"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:37.939238" level="INFO">Clicking element 'xpath=//div[@role='option']//span[text()='Admin']'.</msg>
+<arg>xpath=//div[@role='option']//span[text()='${role}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:37.939238" elapsed="0.165843"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:38.106094" level="INFO">Clicking element 'xpath=//label[text()='Status']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]'.</msg>
+<arg>xpath=//label[text()='Status']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:38.106094" elapsed="0.082069"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:38.189167" level="INFO">Clicking element 'xpath=//div[@role='listbox']//span[text()='Enabled']'.</msg>
+<arg>xpath=//div[@role='listbox']//span[text()='${status}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:38.188163" elapsed="0.075526"/>
+</kw>
+<arg>${username1}</arg>
+<arg>${role}</arg>
+<arg>${status}</arg>
+<status status="PASS" start="2025-04-15T16:45:36.879857" elapsed="1.383832"/>
+</kw>
+<kw name="When Cliquer sur le bouton Search">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:38.265201" level="INFO">Clicking element 'xpath=//button[@type='submit']'.</msg>
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-15T16:45:38.265201" elapsed="0.077820"/>
+</kw>
+<status status="PASS" start="2025-04-15T16:45:38.263689" elapsed="0.079332"/>
+</kw>
+<kw name="And Cliquer sur le bouton de suppression de l'utilisateur">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-15T16:45:38.344021" level="INFO">Clicking element 'xpath=//i[@class="oxd-icon bi-trash"]'.</msg>
+<msg time="2025-04-15T16:45:38.785740" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-8.png"&gt;&lt;img src="selenium-screenshot-8.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-04-15T16:45:38.785740" level="FAIL">StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=135.0.7049.85); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF6252B5335+78597]
+	GetHandleVerifier [0x00007FF6252B5390+78688]
+	(No symbol) [0x00007FF6250691AA]
+	(No symbol) [0x00007FF625070ABC]
+	(No symbol) [0x00007FF625073B1C]
+	(No symbol) [0x00007FF625073BEF]
+	(No symbol) [0x00007FF6250C6F6B]
+	(No symbol) [0x00007FF6250C44A5]
+	(No symbol) [0x00007FF6250C1AE1]
+	(No symbol) [0x00007FF6250C0A42]
+	(No symbol) [0x00007FF6250B2204]
+	(No symbol) [0x00007FF6250E70EA]
+	(No symbol) [0x00007FF6250B1AB6]
+	(No symbol) [0x00007FF6250E7300]
+	(No symbol) [0x00007FF62510F2BB]
+	(No symbol) [0x00007FF6250E6EC3]
+	(No symbol) [0x00007FF6250B03F8]
+	(No symbol) [0x00007FF6250B1163]
+	GetHandleVerifier [0x00007FF62555EEED+2870973]
+	GetHandleVerifier [0x00007FF625559698+2848360]
+	GetHandleVerifier [0x00007FF625576973+2967875]
+	GetHandleVerifier [0x00007FF6252D017A+188746]
+	GetHandleVerifier [0x00007FF6252D845F+222255]
+	GetHandleVerifier [0x00007FF6252BD2B4+111236]
+	GetHandleVerifier [0x00007FF6252BD462+111666]
+	GetHandleVerifier [0x00007FF6252A3589+5465]
+	BaseThreadInitThunk [0x00007FF8B905E8D7+23]
+	RtlUserThreadStart [0x00007FF8BA8F14FC+44]
+</msg>
+<arg>xpath=//i[@class="oxd-icon bi-trash"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="FAIL" start="2025-04-15T16:45:38.344021" elapsed="0.442814">StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=135.0.7049.85); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF6252B5335+78597]
+	GetHandleVerifier [0x00007FF6252B5390+78688]
+	(No symbol) [0x00007FF6250691AA]
+	(No symbol) [0x00007FF625070ABC]
+	(No symbol) [0x00007FF625073B1C]
+	(No symbol) [0x00007FF625073BEF]
+	(No symbol) [0x00007FF6250C6F6B]
+	(No symbol) [0x00007FF6250C44A5]
+	(No symbol) [0x00007FF6250C1AE1]
+	(No symbol) [0x00007FF6250C0A42]
+	(No symbol) [0x00007FF6250B2204]
+	(No symbol) [0x00007FF6250E70EA]
+	(No symbol) [0x00007FF6250B1AB6]
+	(No symbol) [0x00007FF6250E7300]
+	(No symbol) [0x00007FF62510F2BB]
+	(No symbol) [0x00007FF6250E6EC3]
+	(No symbol) [0x00007FF6250B03F8]
+	(No symbol) [0x00007FF6250B1163]
+	GetHandleVerifier [0x00007FF62555EEED+2870973]
+	GetHandleVerifier [0x00007FF625559698+2848360]
+	GetHandleVerifier [0x00007FF625576973+2967875]
+	GetHandleVerifier [0x00007FF6252D017A+188746]
+	GetHandleVerifier [0x00007FF6252D845F+222255]
+	GetHandleVerifier [0x00007FF6252BD2B4+111236]
+	GetHandleVerifier [0x00007FF6252BD462+111666]
+	GetHandleVerifier [0x00007FF6252A3589+5465]
+	BaseThreadInitThunk [0x00007FF8B905E8D7+23]
+	RtlUserThreadStart [0x00007FF8BA8F14FC+44]
+</status>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<arg>xpath=//button[@class="oxd-button oxd-button--medium oxd-button--label-danger orangehrm-button-margin"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-04-15T16:45:38.786835" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2025-04-15T16:45:38.344021" elapsed="0.442814">StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=135.0.7049.85); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF6252B5335+78597]
+	GetHandleVerifier [0x00007FF6252B5390+78688]
+	(No symbol) [0x00007FF6250691AA]
+	(No symbol) [0x00007FF625070ABC]
+	(No symbol) [0x00007FF625073B1C]
+	(No symbol) [0x00007FF625073BEF]
+	(No symbol) [0x00007FF6250C6F6B]
+	(No symbol) [0x00007FF6250C44A5]
+	(No symbol) [0x00007FF6250C1AE1]
+	(No symbol) [0x00007FF6250C0A42]
+	(No symbol) [0x00007FF6250B2204]
+	(No symbol) [0x00007FF6250E70EA]
+	(No symbol) [0x00007FF6250B1AB6]
+	(No symbol) [0x00007FF6250E7300]
+	(No symbol) [0x00007FF62510F2BB]
+	(No symbol) [0x00007FF6250E6EC3]
+	(No symbol) [0x00007FF6250B03F8]
+	(No symbol) [0x00007FF6250B1163]
+	GetHandleVerifier [0x00007FF62555EEED+2870973]
+	GetHandleVerifier [0x00007FF625559698+2848360]
+	GetHandleVerifier [0x00007FF625576973+2967875]
+	GetHandleVerifier [0x00007FF6252D017A+188746]
+	GetHandleVerifier [0x00007FF6252D845F+222255]
+	GetHandleVerifier [0x00007FF6252BD2B4+111236]
+	GetHandleVerifier [0x00007FF6252BD462+111666]
+	GetHandleVerifier [0x00007FF6252A3589+5465]
+	BaseThreadInitThunk [0x00007FF8B905E8D7+23]
+	RtlUserThreadStart [0x00007FF8BA8F14FC+44]
+</status>
+</kw>
+<kw name="Fermer Orange_HRM" type="TEARDOWN">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-04-15T16:45:41.795333" level="INFO">Slept 3 seconds.</msg>
+<arg>3</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-04-15T16:45:38.787829" elapsed="3.007504"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-04-15T16:45:41.795333" elapsed="2.199913"/>
+</kw>
+<doc>Fermeture du navigateur
+On laisse un peu de temps pour visualiser l'écran final</doc>
+<status status="PASS" start="2025-04-15T16:45:38.786835" elapsed="5.209488"/>
+</kw>
+<doc>Supprimer un utilisateur 
+
+Cliquer sur le bouton de suppression de l'utilisateur 
+
+Vérifier que l'utilisateur a été supprimé avec succès 
+</doc>
+<tag>tnr</tag>
+<status status="FAIL" start="2025-04-15T16:45:29.981371" elapsed="14.014952">StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=135.0.7049.85); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF6252B5335+78597]
+	GetHandleVerifier [0x00007FF6252B5390+78688]
+	(No symbol) [0x00007FF6250691AA]
+	(No symbol) [0x00007FF625070ABC]
+	(No symbol) [0x00007FF625073B1C]
+	(No symbol) [0x00007FF625073BEF]
+	(No symbol) [0x00007FF6250C6F6B]
+	(No symbol) [0x00007FF6250C44A5]
+	(No symbol) [0x00007FF6250C1AE1]
+	(No symbol) [0x00007FF6250C0A42]
+	(No symbol) [0x00007FF6250B2204]
+	(No symbol) [0x00007FF6250E70EA]
+	(No symbol) [0x00007FF6250B1AB6]
+	(No symbol) [0x00007FF6250E7300]
+	(No symbol) [0x00007FF62510F2BB]
+	(No symbol) [0x00007FF6250E6EC3]
+	(No symbol) [0x00007FF6250B03F8]
+	(No symbol) [0x00007FF6250B1163]
+	GetHandleVerifier [0x00007FF62555EEED+2870973]
+	GetHandleVerifier [0x00007FF625559698+2848360]
+	GetHandleVerifier [0x00007FF625576973+2967875]
+	GetHandleVerifier [0x00007FF6252D017A+188746]
+	GetHandleVerifier [0x00007FF6252D845F+222255]
+	GetHandleVerifier [0x00007FF6252BD2B4+111236]
+	GetHandleVerifier [0x00007FF6252BD462+111666]
+	GetHandleVerifier [0x00007FF6252A3589+5465]
+	BaseThreadInitThunk [0x00007FF8B905E8D7+23]
+	RtlUserThreadStart [0x00007FF8BA8F14FC+44]
+</status>
+</test>
+<status status="FAIL" start="2025-04-15T16:44:44.649999" elapsed="59.350307"/>
+</suite>
+<status status="FAIL" start="2025-04-15T16:44:44.637018" elapsed="59.365300"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0">Critical Tests</stat>
-<stat pass="1" fail="0">All Tests</stat>
+<stat pass="1" fail="3" skip="0">All Tests</stat>
 </total>
 <tag>
+<stat pass="1" fail="3" skip="0">tnr</stat>
 </tag>
 <suite>
-<stat pass="1" fail="0" id="s1" name="My First">My First</stat>
+<stat name="Tests" id="s1" pass="1" fail="3" skip="0">Tests</stat>
+<stat name="TESTS USERS" id="s1-s1" pass="1" fail="3" skip="0">Tests.TESTS USERS</stat>
 </suite>
 </statistics>
 <errors>

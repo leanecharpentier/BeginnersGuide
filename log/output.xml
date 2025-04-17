@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.10.11 on win32)" generated="2025-04-17T09:40:39.928661" rpa="false" schemaversion="5">
+<suite id="s1" name="TESTS EMPLOYEES" source="C:\Users\leagr\OneDrive\Documents\BeginnersGuide\Tests\TESTS_EMPLOYEES.robot">
+<test id="s1-t1" name="Test02 Rechercher un employé" line="31">
+<kw name="Ouvrir Orange_HRM" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-04-17T09:40:40.070871" level="INFO">Opening browser 'chrome' to base url 'https://opensource-demo.orangehrmlive.com'.</msg>
+<arg>${ORANGE_HRM_URL}</arg>
+<arg>browser=chrome</arg>
+<arg>options=add_experimental_option('excludeSwitches', ['enable-logging'])</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-04-17T09:40:40.069871" elapsed="3.205015"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-04-17T09:40:43.274886" elapsed="0.027693"/>
+</kw>
+<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
+<arg>5s</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2025-04-17T09:40:43.302579" elapsed="0.000999"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-17T09:40:43.304663" level="INFO">Typing text 'Admin' into text field 'xpath=//input[@name="username"]'.</msg>
+<arg>xpath=//input[@name="username"]</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-17T09:40:43.303578" elapsed="0.259077"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-17T09:40:43.563658" level="INFO">Typing text 'admin123' into text field 'xpath=//input[@name="password"]'.</msg>
+<arg>xpath=//input[@name="password"]</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-17T09:40:43.562655" elapsed="0.068885"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-17T09:40:43.632540" level="INFO">Clicking element 'xpath=//button[@type="submit"]'.</msg>
+<arg>xpath=//button[@type="submit"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-17T09:40:43.632540" elapsed="0.816933"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-04-17T09:40:44.454513" level="INFO">${title} = OrangeHRM</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-04-17T09:40:44.449473" elapsed="0.005040"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>OrangeHRM</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-04-17T09:40:44.454513" elapsed="0.001000"/>
+</kw>
+<doc>Ouverture de Chrome à l'adresse https://opensource-demo.orangehrmlive.com
+Connexion à la plateforme OrangeHRM avec les identifiants Admin/admin123</doc>
+<status status="PASS" start="2025-04-17T09:40:40.069871" elapsed="4.385642"/>
+</kw>
+<kw name="Given Aller sur la page Employés">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-17T09:40:44.455513" level="INFO">Clicking element 'xpath=//a[.//span[text()='PIM']]'.</msg>
+<arg>xpath=//a[.//span[text()='PIM']]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-17T09:40:44.455513" elapsed="0.912983"/>
+</kw>
+<status status="PASS" start="2025-04-17T09:40:44.455513" elapsed="0.912983"/>
+</kw>
+<kw name="When Remplir le formulaire de recherche d'employé">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>xpath=//h5[text()='Employee Information']</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-04-17T09:40:45.368496" elapsed="0.214935"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-04-17T09:40:45.583431" level="INFO">${id_input} = xpath=//label[text()='Employee Id']/parent::div/following-sibling::div/input</msg>
+<var>${id_input}</var>
+<arg>xpath=//label[text()='Employee Id']/parent::div/following-sibling::div/input</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-04-17T09:40:45.583431" elapsed="0.000000"/>
+</kw>
+<kw name="Clear Element Text" owner="SeleniumLibrary">
+<arg>${id_input}</arg>
+<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-17T09:40:45.583431" elapsed="0.017220"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-17T09:40:45.600651" level="INFO">Typing text '898989' into text field 'xpath=//label[text()='Employee Id']/parent::div/following-sibling::div/input'.</msg>
+<arg>${id_input}</arg>
+<arg>${employee_id}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-17T09:40:45.600651" elapsed="0.052144"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-17T09:40:45.653796" level="INFO">Clicking element 'xpath=//button[@type='submit']'.</msg>
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-17T09:40:45.653796" elapsed="0.030523"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-04-17T09:40:47.688829" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-04-17T09:40:45.684319" elapsed="2.004510"/>
+</kw>
+<status status="PASS" start="2025-04-17T09:40:45.368496" elapsed="2.320333"/>
+</kw>
+<kw name="Then Vérifier que l'employé est bien trouvé">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[@class='oxd-table-card']</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-04-17T09:40:47.688829" elapsed="0.012858"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2025-04-17T09:40:47.713724" level="INFO">${record_found_text} = (1) Record Found</msg>
+<var>${record_found_text}</var>
+<arg>xpath=//span[@class='oxd-text oxd-text--span']</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-17T09:40:47.701687" elapsed="0.012037"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${record_found_text}</arg>
+<arg>(1) Record Found</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-04-17T09:40:47.713724" elapsed="0.000000"/>
+</kw>
+<kw name="Element Text Should Be" owner="SeleniumLibrary">
+<msg time="2025-04-17T09:40:47.715215" level="INFO">Verifying element 'xpath=//div[@role='cell' and .//div[text()='898989']]//div' contains exact text '898989'.</msg>
+<arg>xpath=//div[@role='cell' and .//div[text()='${employee_id}']]//div</arg>
+<arg>${employee_id}</arg>
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<status status="PASS" start="2025-04-17T09:40:47.715215" elapsed="0.009582"/>
+</kw>
+<kw name="Element Text Should Be" owner="SeleniumLibrary">
+<msg time="2025-04-17T09:40:47.724797" level="INFO">Verifying element 'xpath=//div[@class='oxd-table-row oxd-table-row--with-border oxd-table-row--clickable']/div[3]//div' contains exact text 'Dupont Jean'.</msg>
+<arg>xpath=//div[@class='oxd-table-row oxd-table-row--with-border oxd-table-row--clickable']/div[3]//div</arg>
+<arg>Dupont Jean</arg>
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<status status="PASS" start="2025-04-17T09:40:47.724797" elapsed="0.009014"/>
+</kw>
+<kw name="Element Text Should Be" owner="SeleniumLibrary">
+<msg time="2025-04-17T09:40:47.733811" level="INFO">Verifying element 'xpath=//div[@class='oxd-table-row oxd-table-row--with-border oxd-table-row--clickable']/div[4]//div' contains exact text 'James'.</msg>
+<arg>xpath=//div[@class='oxd-table-row oxd-table-row--with-border oxd-table-row--clickable']/div[4]//div</arg>
+<arg>James</arg>
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<status status="PASS" start="2025-04-17T09:40:47.733811" elapsed="0.009724"/>
+</kw>
+<kw name="Highlight Element">
+<kw name="Get WebElement" owner="SeleniumLibrary">
+<msg time="2025-04-17T09:40:47.748546" level="INFO">${element} = &lt;selenium.webdriver.remote.webelement.WebElement (session="1a3d51a6f7a379bd77b2541406125c67", element="f.B471B901DB9E3D5EBF97FB7AC6FEAB42.d.7713F3C82C1EC55952FCC9FC38590FA4.e.90")&gt;</msg>
+<var>${element}</var>
+<arg>${locator}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<status status="PASS" start="2025-04-17T09:40:47.743535" elapsed="0.005011"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-04-17T09:40:47.749546" level="INFO">Executing JavaScript:
+element = arguments[0];original_style = element.getAttribute('style');element.setAttribute('style', original_style + "; color: red; background: yellow; border: 2px solid red;");return original_style;
+By using argument:
+'&lt;selenium.webdriver.remote.webelement.WebElement (session="1a3d51a6f7a379bd77b2541406125c67", element="f.B471B901DB9E3D5EBF97FB7AC6FEAB42.d.7713F3C82C1EC55952FCC9FC38590FA4.e.90")&gt;'</msg>
+<msg time="2025-04-17T09:40:47.753538" level="INFO">${original_style} = None</msg>
+<var>${original_style}</var>
+<arg>element = arguments[0];</arg>
+<arg>original_style = element.getAttribute('style');</arg>
+<arg>element.setAttribute('style', original_style + "; color: red; background: yellow; border: 2px solid red;");</arg>
+<arg>return original_style;</arg>
+<arg>ARGUMENTS</arg>
+<arg>${element}</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-04-17T09:40:47.748546" elapsed="0.004992"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-04-17T09:40:47.861055" level="INFO">Slept 100 milliseconds.</msg>
+<arg>0.1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-04-17T09:40:47.754057" elapsed="0.106998"/>
+</kw>
+<kw name="Get WebElement" owner="SeleniumLibrary">
+<msg time="2025-04-17T09:40:47.868618" level="INFO">${element} = &lt;selenium.webdriver.remote.webelement.WebElement (session="1a3d51a6f7a379bd77b2541406125c67", element="f.B471B901DB9E3D5EBF97FB7AC6FEAB42.d.7713F3C82C1EC55952FCC9FC38590FA4.e.90")&gt;</msg>
+<var>${element}</var>
+<arg>${locator}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<status status="PASS" start="2025-04-17T09:40:47.861962" elapsed="0.007734"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-04-17T09:40:47.869696" level="INFO">Executing JavaScript:
+element = arguments[0];original_style = arguments[1];element.setAttribute('style', original_style);
+By using arguments:
+'&lt;selenium.webdriver.remote.webelement.WebElement (session="1a3d51a6f7a379bd77b2541406125c67", element="f.B471B901DB9E3D5EBF97FB7AC6FEAB42.d.7713F3C82C1EC55952FCC9FC38590FA4.e.90")&gt;' and 'None'</msg>
+<arg>element = arguments[0];</arg>
+<arg>original_style = arguments[1];</arg>
+<arg>element.setAttribute('style', original_style);</arg>
+<arg>ARGUMENTS</arg>
+<arg>${element}</arg>
+<arg>${original_style}</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-04-17T09:40:47.869696" elapsed="0.008245"/>
+</kw>
+<arg>xpath=//div[@class='oxd-table-row oxd-table-row--with-border oxd-table-row--clickable']</arg>
+<status status="PASS" start="2025-04-17T09:40:47.743535" elapsed="0.134406"/>
+</kw>
+<status status="PASS" start="2025-04-17T09:40:47.688829" elapsed="0.189112"/>
+</kw>
+<kw name="Fermer Orange_HRM" type="TEARDOWN">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-04-17T09:40:50.888864" level="INFO">Slept 3 seconds.</msg>
+<arg>3</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-04-17T09:40:47.878999" elapsed="3.009865"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-04-17T09:40:50.888864" elapsed="2.232095"/>
+</kw>
+<doc>Fermeture du navigateur
+On laisse un peu de temps pour visualiser l'écran final</doc>
+<status status="PASS" start="2025-04-17T09:40:47.877941" elapsed="5.243923"/>
+</kw>
+<doc>Rechercher un employé 
+
+Vérifier que l'employé est bien trouvé 
+</doc>
+<tag>tnr</tag>
+<status status="PASS" start="2025-04-17T09:40:40.068879" elapsed="13.052985"/>
+</test>
+<status status="PASS" start="2025-04-17T09:40:39.929662" elapsed="13.193200"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">tnr</stat>
+</tag>
+<suite>
+<stat name="TESTS EMPLOYEES" id="s1" pass="1" fail="0" skip="0">TESTS EMPLOYEES</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

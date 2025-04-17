@@ -8,5 +8,5 @@
     "robot.python.env": {
         "PROJECT_FOLDER": "${workspaceFolder}"
     },
-    "editor.renderWhitespace": "all",
+    "editor.renderWhitespace": "all"
 }
