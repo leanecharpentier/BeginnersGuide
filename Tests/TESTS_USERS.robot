@@ -22,7 +22,7 @@ ${updated}    Updated
 
 
 *** Test Cases ***
-Test01 Ajouter un utilisateur
+Test01 - Ajouter un utilisateur
     [Documentation]
     ...   Ajout d'un utilisateur ${\n}
     ...   Cliquer sur le bouton "+ Add" dans la section "User Management" ${\n}
@@ -33,7 +33,7 @@ Test01 Ajouter un utilisateur
     And Remplir le formulaire d'ajout d'utilisateur    ${username}    ${password}    ${role}    ${status}   ${employee_name}
     Then Vérifier que l'utilisateur est bien ajouté    ${username}
 
-Test02 Rechercher un utilisateur
+Test02 - Rechercher un utilisateur
     [Documentation]
     ...    Rechercher un utilisateur ${\n}
     ...    Remplir le formulaire de rechercher ${\n}
@@ -177,25 +177,3 @@ Vérifier l'utilisateur qui s'affiche
     SeleniumLibrary.Element Should Contain    xpath=.//div[@role='cell'][3]    ${role}         parent=${row}
     SeleniumLibrary.Element Should Contain    xpath=.//div[@role='cell'][4]    ${employee_name}     parent=${row}
     SeleniumLibrary.Element Should Contain    xpath=.//div[@role='cell'][5]    ${status}       parent=${row}
-
-Highlight Element
-    [Arguments]    ${locator}
-    # Change le style de couleur de l'élément pour le mettre en évidence (le bord en rouge et le fond en jaune)
-    # Le style est repositionné par défault
-    ${element}    SeleniumLibrary.Get WebElement    ${locator}
-    ${original_style}    SeleniumLibrary.Execute Javascript
-    ...    element = arguments[0];
-    ...    original_style = element.getAttribute('style');
-    ...    element.setAttribute('style', original_style + "; color: red; background: yellow; border: 2px solid red;");
-    ...    return original_style;
-    ...    ARGUMENTS
-    ...    ${element}
-    BuiltIn.Sleep    0.1s
-    ${element}    SeleniumLibrary.Get WebElement    ${locator}
-    SeleniumLibrary.Execute Javascript
-    ...    element = arguments[0];
-    ...    original_style = arguments[1];
-    ...    element.setAttribute('style', original_style);
-    ...    ARGUMENTS
-    ...    ${element}
-    ...    ${original_style}

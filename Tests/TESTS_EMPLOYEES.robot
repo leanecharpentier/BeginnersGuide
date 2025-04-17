@@ -11,13 +11,17 @@ Test Tags           tnr
 
 *** Variables ***
 ${ORANGE_HRM_URL}    https://opensource-demo.orangehrmlive.com
-${username}    Admin
-${password}    admin123
+${usernameAdmin}    Admin
+${passwordAdmin}    admin123
 ${employee_id}    898989
+${employee_firstname}    Jean
+${employee_lastname}    Dupont
+${employee_middlename}    James
+${updated}    Updated
+
 
 *** Test Cases ***
-
-Test01 Ajouter un employé
+Test01 - Ajouter un employé
     [Documentation]
     ...   Ajout d'un employé ${\n}
     ...   Cliquer sur le bouton "+ Add" ${\n}
@@ -28,13 +32,38 @@ Test01 Ajouter un employé
     And Remplir le formulaire d'ajout d'employé
     Then Vérifier que l'employé est bien ajouté
 
-Test02 Rechercher un employé
+Test02 - Rechercher un employé
     [Documentation]
     ...   Rechercher un employé ${\n}
     ...   Vérifier que l'employé est bien trouvé ${\n}
     Given Aller sur la page Employés
     When Remplir le formulaire de recherche d'employé
     Then Vérifier que l'employé est bien trouvé
+
+Test03 - Modifier un employé
+    [Documentation]
+    ...   Modifier un employé ${\n}
+    ...   Cliquer sur le bouton de modification de l'employé ${\n}
+    ...   Modifier les informations de l'employé ${\n}
+    ...   Cliquer sur le bouton Enregistrer ${\n}
+    ...   Vérifier que l'employé a été modifié avec succès ${\n}
+    Given Aller sur la page Employés
+    When Remplir le formulaire de recherche d'employé
+    And Cliquer sur le bouton de modification de l'employé
+    When Modifier les informations de l'employé
+    And Cliquer sur le bouton Enregistrer
+    Then Vérifier le message de réussite qui s'affiche    Successfully Updated
+
+Test04 - Supprimer un employé
+    [Documentation]
+    ...   Supprimer un employé ${\n}
+    ...   Cliquer sur le bouton de suppression de l'employé ${\n}
+    ...   Vérifier que l'employé a été supprimé avec succès ${\n}
+    Given Aller sur la page Employés
+    When Remplir le formulaire de recherche d'employé
+    And Cliquer sur le bouton de suppression de l'employé
+    Then Vérifier le message de réussite qui s'affiche    Successfully Deleted
+
 
 *** Keywords ***
 Ouvrir Orange_HRM
@@ -48,8 +77,8 @@ Ouvrir Orange_HRM
     ...    options=add_experimental_option('excludeSwitches', ['enable-logging'])
     SeleniumLibrary.Maximize Browser Window
     SeleniumLibrary.Set Selenium Implicit Wait    5s
-    SeleniumLibrary.Input Text    xpath=//input[@name="username"]    ${username}
-    SeleniumLibrary.Input Text    xpath=//input[@name="password"]    ${password}
+    SeleniumLibrary.Input Text    xpath=//input[@name="username"]    ${usernameAdmin}
+    SeleniumLibrary.Input Text    xpath=//input[@name="password"]    ${passwordAdmin}
     SeleniumLibrary.Click Element    xpath=//button[@type="submit"]
 
     # Vérifier que le titre contient "OrangeHRM"
@@ -72,9 +101,9 @@ Clicker sur le bouton "+ Add"
 
 Remplir le formulaire d'ajout d'employé
     SeleniumLibrary.Wait Until Page Contains Element    xpath=//h6[text()='Add Employee']
-    SeleniumLibrary.Input Text    xpath=//input[@placeholder='First Name']    Dupont
-    SeleniumLibrary.Input Text    xpath=//input[@placeholder='Middle Name']    Jean
-    SeleniumLibrary.Input Text    xpath=//input[@placeholder='Last Name']    James
+    SeleniumLibrary.Input Text    xpath=//input[@placeholder='First Name']    ${employee_firstname}
+    SeleniumLibrary.Input Text    xpath=//input[@placeholder='Middle Name']    ${employee_middlename}
+    SeleniumLibrary.Input Text    xpath=//input[@placeholder='Last Name']    ${employee_lastname}
     ${id_input}    Set Variable    xpath=//label[text()='Employee Id']/parent::div/following-sibling::div/input
     SeleniumLibrary.Click Element    ${id_input}
     SeleniumLibrary.Press Keys    ${id_input}    CTRL+a    DELETE
@@ -103,66 +132,30 @@ Vérifier que l'employé est bien trouvé
     SeleniumLibrary.Element Text Should Be    xpath=//div[@role='cell' and .//div[text()='${employee_id}']]//div    ${employee_id}
     SeleniumLibrary.Element Text Should Be
     ...    xpath=//div[@class='oxd-table-row oxd-table-row--with-border oxd-table-row--clickable']/div[3]//div
-    ...    Dupont Jean
+    ...    ${employee_firstname} ${employee_middlename}
     SeleniumLibrary.Element Text Should Be
     ...    xpath=//div[@class='oxd-table-row oxd-table-row--with-border oxd-table-row--clickable']/div[4]//div
-    ...    James
+    ...    ${employee_lastname}
+    
+Cliquer sur le bouton de modification de l'employé
+    ${text}    Set Variable    Personal Details
+    SeleniumLibrary.Click Element    xpath=//button[@class='oxd-icon-button oxd-table-cell-action-space' and .//i[@class='oxd-icon bi-pencil-fill']]
+    SeleniumLibrary.Wait Until Element Contains    xpath=//h6[@class='oxd-text oxd-text--h6 orangehrm-main-title']    ${text}
 
-Scroll Element To Top
-    [Documentation]    Permet de placer l'élément en haut de page avec delta
-    ...    Par defaut le delta=0
-    ...    Le delta peut être la hauteur d'un bandeau
-    [Arguments]    ${locator}    ${delta_top}=0
-    SeleniumLibrary.Wait Until Page Contains Element    ${locator}
-    ${el_pos_y}    SeleniumLibrary.Get Vertical Position    ${locator}
-    ${final_y}    BuiltIn.Evaluate    int(${el_pos_y}) -int(${delta_top})
-    SeleniumLibrary.Execute Javascript    window.scrollTo(0, arguments[0])    ARGUMENTS    ${final_y}
-    SeleniumLibrary.Wait Until Element Is Visible    ${locator}
+ Modifier les informations de l'employé
+    SeleniumLibrary.Click Element    xpath=//input[@name="firstName"]
+    SeleniumLibrary.Input Text       xpath=//input[@name="firstName"]    ${updated}
 
-Highlight Element
-    [Arguments]    ${locator}
-    # Change le style de couleur de l'élément pour le mettre en évidence (le bord en rouge et le fond en jaune)
-    # Le style est repositionné par défault
-    ${element}    SeleniumLibrary.Get WebElement    ${locator}
-    ${original_style}    SeleniumLibrary.Execute Javascript
-    ...    element = arguments[0];
-    ...    original_style = element.getAttribute('style');
-    ...    element.setAttribute('style', original_style + "; color: red; background: yellow; border: 2px solid red;");
-    ...    return original_style;
-    ...    ARGUMENTS
-    ...    ${element}
-    BuiltIn.Sleep    0.1s
-    ${element}    SeleniumLibrary.Get WebElement    ${locator}
-    SeleniumLibrary.Execute Javascript
-    ...    element = arguments[0];
-    ...    original_style = arguments[1];
-    ...    element.setAttribute('style', original_style);
-    ...    ARGUMENTS
-    ...    ${element}
-    ...    ${original_style}
+Cliquer sur le bouton Enregistrer
+    ${xpath}=    Set Variable    //button[@class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space']
+    SeleniumLibrary.Scroll Element Into View    ${xpath}
+    SeleniumLibrary.Click Element               ${xpath}
 
 
-Wait Until Element Attribute Contains
-    [Arguments]    ${locator}    ${attribute_name}    ${attribute_expected_value}    ${nb_loop_in_second}=2
-    ${initial_implicit_wait}    Set Selenium Implicit Wait    0
-    FOR    ${counter}    IN RANGE    ${nb_loop_in_second}
-        ${find_element}    Run Keyword And Return Status    SeleniumLibrary.Page Should Contain Element    ${locator}
-        IF    ${find_element}
-            ${attribute_actual_value}    SeleniumLibrary.Get Element Attribute    ${locator}    ${attribute_name}
-            ${comparaison}    Run Keyword And Return Status
-            ...    Should Contain
-            ...    ${attribute_actual_value}
-            ...    ${attribute_expected_value}
-            IF    ${comparaison}    BREAK
-        END
-        Sleep    1s
-    END
-    Set Selenium Implicit Wait    ${initial_implicit_wait}
-    IF    ${find_element} == ${false}    Fail    locator ${locator} not found
-    IF    ${comparaison} == ${false}
-        ${outerHTML}    SeleniumLibrary.Get Element Attribute    ${locator}    outerHTML
-        ${message}    Catenate    locator ${locator} found but the value of attribute ${attribute_name} is different
-        ...    \nExpected=${attribute_expected_value} != Actual=${attribute_actual_value}
-        ...    \n${outerHTML}
-        Fail    ${message}
-    END
+Vérifier le message de réussite qui s'affiche
+    [Arguments]    ${message}=${None}
+    SeleniumLibrary.Wait Until Element Contains    //p[@class='oxd-text oxd-text--p oxd-text--toast-message oxd-toast-content-text']    ${message}
+
+Cliquer sur le bouton de suppression de l'employé
+    SeleniumLibrary.Click Element    xpath=//i[@class="oxd-icon bi-trash"]
+    SeleniumLibrary.Click Element    xpath=//button[@class="oxd-button oxd-button--medium oxd-button--label-danger orangehrm-button-margin"]
