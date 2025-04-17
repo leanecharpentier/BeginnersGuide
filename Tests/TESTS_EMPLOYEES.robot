@@ -13,9 +13,28 @@ Test Tags           tnr
 ${ORANGE_HRM_URL}    https://opensource-demo.orangehrmlive.com
 ${username}    Admin
 ${password}    admin123
-
+${employee_id}    898989
 
 *** Test Cases ***
+
+Test01 Ajouter un employé
+    [Documentation]
+    ...   Ajout d'un employé ${\n}
+    ...   Cliquer sur le bouton "+ Add" ${\n}
+    ...   Remplir le formulaire d'ajout d'employé ${\n}
+    ...   Vérifier que l'employé est bien ajouté ${\n}
+    Given Aller sur la page Employés
+    When Clicker sur le bouton "+ Add"
+    And Remplir le formulaire d'ajout d'employé
+    Then Vérifier que l'employé est bien ajouté
+
+Test02 Rechercher un employé
+    [Documentation]
+    ...   Rechercher un employé ${\n}
+    ...   Vérifier que l'employé est bien trouvé ${\n}
+    Given Aller sur la page Employés
+    When Remplir le formulaire de recherche d'employé
+    Then Vérifier que l'employé est bien trouvé
 
 *** Keywords ***
 Ouvrir Orange_HRM
@@ -44,6 +63,50 @@ Fermer Orange_HRM
     BuiltIn.Sleep    3
     # Capture Page Screenshot
     SeleniumLibrary.Close Browser
+
+Aller sur la page Employés
+    SeleniumLibrary.Click Element   xpath=//a[.//span[text()='PIM']]
+
+Clicker sur le bouton "+ Add"
+    SeleniumLibrary.Click Element   xpath=//button[@type='button' and @class='oxd-button oxd-button--medium oxd-button--secondary']
+
+Remplir le formulaire d'ajout d'employé
+    SeleniumLibrary.Wait Until Page Contains Element    xpath=//h6[text()='Add Employee']
+    SeleniumLibrary.Input Text    xpath=//input[@placeholder='First Name']    Dupont
+    SeleniumLibrary.Input Text    xpath=//input[@placeholder='Middle Name']    Jean
+    SeleniumLibrary.Input Text    xpath=//input[@placeholder='Last Name']    James
+    ${id_input}    Set Variable    xpath=//label[text()='Employee Id']/parent::div/following-sibling::div/input
+    SeleniumLibrary.Click Element    ${id_input}
+    SeleniumLibrary.Press Keys    ${id_input}    CTRL+a    DELETE
+    SeleniumLibrary.Input Text    ${id_input}    ${employee_id}
+    SeleniumLibrary.Click Element    xpath=//button[@type='submit']
+
+Vérifier que l'employé est bien ajouté
+    SeleniumLibrary.Wait Until Element Is Visible    xpath=//div[contains(@class, 'oxd-toast--success')]    timeout=10s
+    ${message_title}    SeleniumLibrary.Get Text    xpath=//p[contains(@class, 'oxd-text--toast-title')]
+    ${message_content}    SeleniumLibrary.Get Text    xpath=//p[contains(@class, 'oxd-text--toast-message')]
+    BuiltIn.Should Contain    ${message_title}    Success
+    BuiltIn.Should Contain    ${message_content}    Successfully Saved
+
+Remplir le formulaire de recherche d'employé
+    SeleniumLibrary.Wait Until Page Contains Element    xpath=//h5[text()='Employee Information']
+    ${id_input}    Set Variable    xpath=//label[text()='Employee Id']/parent::div/following-sibling::div/input
+    SeleniumLibrary.Clear Element Text    ${id_input}
+    SeleniumLibrary.Input Text    ${id_input}    ${employee_id}
+    SeleniumLibrary.Click Element    xpath=//button[@type='submit']
+    Sleep    2s
+
+Vérifier que l'employé est bien trouvé
+    SeleniumLibrary.Wait Until Element Is Visible    xpath=//div[@class='oxd-table-card']    timeout=10s
+    ${record_found_text}    SeleniumLibrary.Get Text    xpath=//span[@class='oxd-text oxd-text--span']
+    BuiltIn.Should Contain    ${record_found_text}    (1) Record Found
+    SeleniumLibrary.Element Text Should Be    xpath=//div[@role='cell' and .//div[text()='${employee_id}']]//div    ${employee_id}
+    SeleniumLibrary.Element Text Should Be
+    ...    xpath=//div[@class='oxd-table-row oxd-table-row--with-border oxd-table-row--clickable']/div[3]//div
+    ...    Dupont Jean
+    SeleniumLibrary.Element Text Should Be
+    ...    xpath=//div[@class='oxd-table-row oxd-table-row--with-border oxd-table-row--clickable']/div[4]//div
+    ...    James
 
 Scroll Element To Top
     [Documentation]    Permet de placer l'élément en haut de page avec delta
