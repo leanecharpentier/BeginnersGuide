@@ -11,10 +11,10 @@ Test Tags           tnr
 
 *** Variables ***
 ${ORANGE_HRM_URL}    https://opensource-demo.orangehrmlive.com
-${username}    Admin
-${password}    admin123
-${username1}   James
-${password1}   test123
+${usernameAdmin}    Admin
+${passwordAdmin}    admin123
+${username}   James
+${password}   test123
 ${employee_name}   James
 ${role}   Admin
 ${status}   Enabled
@@ -22,7 +22,6 @@ ${updated}    Updated
 
 
 *** Test Cases ***
-
 Test01 Ajouter un utilisateur
     [Documentation]
     ...   Ajout d'un utilisateur ${\n}
@@ -31,8 +30,8 @@ Test01 Ajouter un utilisateur
     ...   Vérifier que l'utilisateur est bien ajouté ${\n}
     Given Aller sur la page Admin
     When Clicker sur le bouton "+ Add"
-    And Remplir le formulaire d'ajout d'utilisateur    ${username1}    ${password1}    ${role}    ${status}   ${employee_name}
-    Then Vérifier que l'utilisateur est bien ajouté    ${username1}
+    And Remplir le formulaire d'ajout d'utilisateur    ${username}    ${password}    ${role}    ${status}   ${employee_name}
+    Then Vérifier que l'utilisateur est bien ajouté    ${username}
 
 Test02 Rechercher un utilisateur
     [Documentation]
@@ -41,9 +40,9 @@ Test02 Rechercher un utilisateur
     ...    Cliquer sur le bouton rechercher ${\n}
     ...    Vérifier que l'utilisateur s'affiche ${\n}
     Given Aller sur la page Admin
-    When Remplir le formulaire de recherche    ${username1}    ${role}    ${status}
+    When Remplir le formulaire de recherche    ${username}    ${role}    ${status}
     When Cliquer sur le bouton Search
-    Then Vérifier que le message qui s'affiche    (1) Record Found
+    Then Vérifier le message qui s'affiche    (1) Record Found
     Then Vérifier l'utilisateur qui s'affiche
 
 Test03 - Modifier un utilisateur
@@ -54,23 +53,25 @@ Test03 - Modifier un utilisateur
     ...   Cliquer sur le bouton Enregistrer ${\n}
     ...   Vérifier que l'utilisateur a été modifié avec succès ${\n}
     Given Aller sur la page admin
-    When Remplir le formulaire de recherche    ${username1}    ${role}    ${status}
+    When Remplir le formulaire de recherche    ${username}    ${role}    ${status}
     When Cliquer sur le bouton Search
     And Cliquer sur le bouton de modification de l'utilisateur
     When Modifier les informations de l'utilisateur
     And Cliquer sur le bouton Enregistrer
-    Then Vérifier que l'utilisateur a été modifié avec succès    Successfully Updated
+    Then Vérifier le message de réussite qui s'affiche    Successfully Updated
 
 Test04 - Supprimer un utilisateur
     [Documentation]
     ...   Supprimer un utilisateur ${\n}
     ...   Cliquer sur le bouton de suppression de l'utilisateur ${\n}
     ...   Vérifier que l'utilisateur a été supprimé avec succès ${\n}
-    ${username_updated}=    Set Variable    ${username1}${updated}
+    ${username_updated}=    Set Variable    ${username}${updated}
     Given Aller sur la page admin
     When Remplir le formulaire de recherche    ${username_updated}   ${role}    ${status}
     When Cliquer sur le bouton Search
     And Cliquer sur le bouton de suppression de l'utilisateur
+    Then Vérifier le message de réussite qui s'affiche    Successfully Deleted
+
 
 *** Keywords ***
 Ouvrir Orange_HRM
@@ -84,8 +85,8 @@ Ouvrir Orange_HRM
     ...    options=add_experimental_option('excludeSwitches', ['enable-logging'])
     SeleniumLibrary.Maximize Browser Window
     SeleniumLibrary.Set Selenium Implicit Wait    5s
-    SeleniumLibrary.Input Text    xpath=//input[@name="username"]    ${username}
-    SeleniumLibrary.Input Text    xpath=//input[@name="password"]    ${password}
+    SeleniumLibrary.Input Text    xpath=//input[@name="username"]    ${usernameAdmin}
+    SeleniumLibrary.Input Text    xpath=//input[@name="password"]    ${passwordAdmin}
     SeleniumLibrary.Click Element    xpath=//button[@type="submit"]
 
     # Vérifier que le titre contient "OrangeHRM"
@@ -105,16 +106,17 @@ Aller sur la page Admin
 
 Cliquer sur le bouton de modification de l'utilisateur
     ${text}    Set Variable    Edit User
-    Click Element    xpath=(//button[@class='oxd-icon-button oxd-table-cell-action-space' and .//i[contains(@class, 'bi-pencil-fill')]])[1]
+    SeleniumLibrary.Click Element    xpath=(//button[@class='oxd-icon-button oxd-table-cell-action-space' and .//i[contains(@class, 'bi-pencil-fill')]])[1]
 
-    Wait Until Element Contains    xpath=//h6[@class='oxd-text oxd-text--h6 orangehrm-main-title']    ${text}
+    SeleniumLibrary.Wait Until Element Contains    xpath=//h6[@class='oxd-text oxd-text--h6 orangehrm-main-title']    ${text}
 
 Modifier les informations de l'utilisateur  
-    Input Text    xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input    ${updated}    clear=True
+    SeleniumLibrary.Click Element    xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input
+    SeleniumLibrary.Input Text       xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input    ${updated}
 
 Cliquer sur le bouton Enregistrer
-    Scroll Element Into View         xpath=//button[@type='submit']
-    Click Element    xpath=//button[@type='submit']
+    SeleniumLibrary.Scroll Element Into View         xpath=//button[@type='submit']
+    SeleniumLibrary.Click Element    xpath=//button[@type='submit']
 
 Cliquer sur le bouton de suppression de l'utilisateur
     SeleniumLibrary.Click Element    xpath=//i[@class="oxd-icon bi-trash"]
@@ -124,46 +126,36 @@ Clicker sur le bouton "+ Add"
     SeleniumLibrary.Click Element   xpath=//button[@type='button' and @class='oxd-button oxd-button--medium oxd-button--secondary']
 
 Remplir le formulaire d'ajout d'utilisateur
-    [Arguments]    ${username1}    ${password1}    ${role}    ${status}    ${employee_name}
-    # Sélectionner "User Role"
+    [Arguments]    ${username}    ${password}    ${role}    ${status}    ${employee_name}
     SeleniumLibrary.Click Element    xpath=//label[text()='User Role']/following::div[contains(@class, 'oxd-select-text')]
     SeleniumLibrary.Wait Until Element Is Visible    xpath=//div[@role='option' and contains(normalize-space(), '${role}')]    timeout=10s
     SeleniumLibrary.Click Element    xpath=//div[@role='option' and contains(normalize-space(), '${role}')]
 
-
-    # Saisir "Employee Name"
     SeleniumLibrary.Input Text    xpath=//label[text()='Employee Name']/following::input[1]    ${employee_name}
     SeleniumLibrary.Wait Until Element Is Visible    xpath=//div[@role='option' and contains(normalize-space(), '${employee_name}')]    timeout=10s
     SeleniumLibrary.Click Element    xpath=//div[@role='option' and contains(normalize-space(), '${employee_name}')]
 
-    # Sélectionner "Status"
     SeleniumLibrary.Click Element    xpath=//label[text()='Status']/following::div[contains(@class, 'oxd-select-text')]
     SeleniumLibrary.Wait Until Element Is Visible    xpath=//div[@role='option' and contains(normalize-space(), 'Enabled')]    timeout=10s
     SeleniumLibrary.Click Element    xpath=//div[@role='option' and contains(normalize-space(), 'Enabled')]
 
-    # Saisir "Username"
-    SeleniumLibrary.Input Text    xpath=//label[text()='Username']/following::input[1]    ${username1}
+    SeleniumLibrary.Input Text    xpath=//label[text()='Username']/following::input[1]    ${username}
 
-    # Saisir "Password" et "Confirm Password"
-    SeleniumLibrary.Input Text    xpath=//label[text()='Password']/following::input[1]    ${password1}
-    SeleniumLibrary.Input Text    xpath=//label[text()='Confirm Password']/following::input[1]    ${password1}
+    SeleniumLibrary.Input Text    xpath=//label[text()='Password']/following::input[1]    ${password}
+    SeleniumLibrary.Input Text    xpath=//label[text()='Confirm Password']/following::input[1]    ${password}
 
-    # Cliquer sur "Save"
     SeleniumLibrary.Click Element    xpath=//button[@type='submit' and text()=' Save ']
 
 Vérifier que l'utilisateur est bien ajouté
-    [Arguments]    ${username1}
-    SeleniumLibrary.Wait Until Page Contains Element    xpath=//div[contains(text(), '${username1}')]    timeout=10s
-    SeleniumLibrary.Page Should Contain Element    xpath=//div[contains(text(), '${username1}')]
+    [Arguments]    ${username}
+    SeleniumLibrary.Wait Until Page Contains Element    xpath=//div[contains(text(), '${username}')]    timeout=10s
+    SeleniumLibrary.Page Should Contain Element    xpath=//div[contains(text(), '${username}')]
 
 Remplir le formulaire de recherche
     [Arguments]    ${username}=${None}    ${role}=${None}    ${status}=${None}
-    # Remplir le champ username
     SeleniumLibrary.Input Text    xpath=//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input    ${username}
-    # Ouvrir le select et cliquer sur le champ ${status}
     SeleniumLibrary.Click Element    xpath=//label[text()='User Role']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]
     SeleniumLibrary.Click Element    xpath=//div[@role='option']//span[text()='${role}']
-    # Ouvrir le select et cliquer sur le champ ${status}
     SeleniumLibrary.Click Element    xpath=//label[text()='Status']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text')]
     SeleniumLibrary.Click Element    xpath=//div[@role='listbox']//span[text()='${status}']
 
@@ -171,20 +163,20 @@ Cliquer sur le bouton Search
     SeleniumLibrary.Click Element    xpath=//button[@type='submit']
 
 
-Vérifier que l'utilisateur a été modifié avec succès
+Vérifier le message de réussite qui s'affiche
     [Arguments]    ${message}=${None}
     SeleniumLibrary.Wait Until Element Contains    //p[@class='oxd-text oxd-text--p oxd-text--toast-message oxd-toast-content-text']    ${message}
 
-Vérifier que le message qui s'affiche
+Vérifier le message qui s'affiche
     [Arguments]    ${message}=${None}
     SeleniumLibrary.Wait Until Element Contains    //span[@class='oxd-text oxd-text--span']    ${message}
 
 Vérifier l'utilisateur qui s'affiche
-    ${row} =    Get WebElement    xpath=//div[@role='row' and .//div[text()='${employee_name}']]
-    SeleniumLibrary.Element Should Contain    xpath=.//div[1]    ${username1}    parent=${row}
-    SeleniumLibrary.Element Should Contain    xpath=.//div[2]    ${role}    parent=${row}
-    SeleniumLibrary.Element Should Contain    xpath=.//div[3]    ${employee_name}    parent=${row}
-    SeleniumLibrary.Element Should Contain    xpath=.//div[4]    ${status}    parent=${row}
+    ${row}=    Get WebElement    xpath=//div[@role='row' and .//div[text()='${employee_name}']]
+    SeleniumLibrary.Element Should Contain    xpath=.//div[@role='cell'][2]    ${username}    parent=${row}
+    SeleniumLibrary.Element Should Contain    xpath=.//div[@role='cell'][3]    ${role}         parent=${row}
+    SeleniumLibrary.Element Should Contain    xpath=.//div[@role='cell'][4]    ${employee_name}     parent=${row}
+    SeleniumLibrary.Element Should Contain    xpath=.//div[@role='cell'][5]    ${status}       parent=${row}
 
 Highlight Element
     [Arguments]    ${locator}
