@@ -98,7 +98,7 @@ Fermer Orange_HRM
     ...    Fermeture du navigateur
     ...    On laisse un peu de temps pour visualiser l'écran final
     BuiltIn.Sleep    3
-    # Capture Page Screenshot
+    Capture Page Screenshot
     SeleniumLibrary.Close Browser
 
 Aller sur la page Admin
